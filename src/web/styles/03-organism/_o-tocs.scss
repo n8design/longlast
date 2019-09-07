@@ -1,0 +1,20 @@
+.o-tocs {
+    max-height: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+
+    transition: max-height 0.25s ease-in-out 0,
+        border-bottom 5s ease-in-out 0.125s;
+
+    &inner {
+        margin: 1em;
+    }
+
+    &.active {
+        max-height: 100vh;
+        height: auto;
+        border-bottom: 1px $c-black solid;
+        transition: max-height 0.25s ease-in-out 0,
+            border-bottom 5s ease-in-out 0.125s;
+    }
+}

@@ -1,0 +1,9 @@
+.o-viewer {
+    display: block;
+    border: 0;
+    width: 100%;
+    max-width: 100vw;
+    height: calc(100vh - #{$toolbar-height});
+    margin: 0 auto;
+    transition: max-width 0.75s ease-in-out;
+}

@@ -1,0 +1,58 @@
+{
+  "name": "stylez",
+  "version": "0.0.1",
+  "description": "Stylez is just a Style Guide",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Stefan Bauer (@stfbauer)",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/core": "^7.5.5",
+    "babel": "^6.23.0",
+    "browser-sync": "^2.26.7",
+    "cross-env": "^5.2.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-cli": "^2.2.0",
+    "gulp-eslint": "^6.0.0",
+    "gulp-if": "^3.0.0",
+    "gulp-load-plugins": "^2.0.1",
+    "gulp-plumber": "^1.2.1",
+    "gulp-postcss": "^8.0.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "Firefox ESR"
+  ],
+  "eslintConfig": {
+    "parserOptions": {
+      "sourceType": "module"
+    },
+    "env": {
+      "es6": true,
+      "node": true,
+      "browser": true
+    },
+    "rules": {
+      "quotes": [
+        2,
+        "single"
+      ]
+    }
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.6.0",
+    "@babel/preset-env": "^7.5.5",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-transform-imports": "^2.0.0",
+    "babel-preset-es2015": "^6.24.1",
+    "webpack": "^4.39.3"
+  }
+}
