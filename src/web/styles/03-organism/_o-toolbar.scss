@@ -1,5 +1,6 @@
-.o-tools {
-    width: 100vw;
-    min-height: #{$toolbar-height};
-    display: flex;
+.o-tools{
+	display: flex;
+
+	width: 100vw;
+	min-height: #{$toolbar-height};
 }

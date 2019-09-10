@@ -1,20 +1,23 @@
-.o-tocs {
-    max-height: 0;
-    overflow: hidden;
-    box-sizing: border-box;
+.o-tocs{
+	overflow: hidden;
 
-    transition: max-height 0.25s ease-in-out 0,
-        border-bottom 5s ease-in-out 0.125s;
+	box-sizing: border-box;
+	max-height: 0;
 
-    &inner {
-        margin: 1em;
-    }
+	transition: max-height .25s ease-in-out 0,
+	border-bottom 5s ease-in-out .125s;
 
-    &.active {
-        max-height: 100vh;
-        height: auto;
-        border-bottom: 1px $c-black solid;
-        transition: max-height 0.25s ease-in-out 0,
-            border-bottom 5s ease-in-out 0.125s;
-    }
+	&inner{
+		margin: 1em;
+	}
+
+	&.active{
+		height: auto;
+		max-height: 100vh;
+
+		transition: max-height .25s ease-in-out 0,
+		border-bottom 5s ease-in-out .125s;
+
+		border-bottom: 1px $c-black solid;
+	}
 }

@@ -1,14 +1,17 @@
-.a-filter {
-    background-color: $c-white;
-    border: 2px $c-black solid;
-    border-radius: 0;
-    text-transform: uppercase;
-    font-weight: bold;
-    height: 23PX;
+.a-filter{
+	font-weight: bold;
 
-    &.selected,
-    &:active {
-        background-color: $c-yellow;
-        color: $c-black;
-    }
+	height: 23PX;
+
+	text-transform: uppercase;
+
+	border: 2px $c-black solid;
+	border-radius: 0;
+	background-color: $c-white;
+
+	&.selected,
+	&:active{
+		color: $c-black;
+		background-color: $c-yellow;
+	}
 }

@@ -1,13 +1,16 @@
-.o-viewer {
-    display: block;
-    border: 0;
-    width: 100%;
-    max-width: 100vw;
-    height: calc(100vh - #{$toolbar-height});
-    margin: 0 auto;
-    transition: max-width 0.75s ease-in-out;
-    border: 1px black solid;
-    border-top: 0;
-    border-bottom: 0;
-    box-sizing: border-box;
+.o-viewer{
+	display: block;
+
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 100vw;
+	height: calc(100vh - #{$toolbar-height});
+	margin: 0 auto;
+
+	transition: max-width .75s ease-in-out;
+
+	border: 0;
+	border: 1px black solid;
+	border-top: 0;
+	border-bottom: 0;
 }
