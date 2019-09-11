@@ -12,6 +12,8 @@
 	}
 
 	&.active{
+		overflow: unset;
+
 		height: auto;
 		max-height: 100vh;
 

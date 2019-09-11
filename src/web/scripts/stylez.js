@@ -15,12 +15,21 @@ class Events {
     static _toggleButtons(btnList, curButton) {
 
         btnList.forEach((btn) => {
+
             if (btn === curButton) {
+
                 btn.classList.add('selected');
+
             } else {
+
                 btn.classList.remove('selected');
+
             }
-        })
+
+        });
+
+        // updateing Session Status
+        SessionStorage.updateStatus();
 
     }
 
@@ -76,12 +85,106 @@ class Events {
 
     }
 
-    static toggleTocs(event){
+    static toggleTocs(event) {
 
         let tocs = document.querySelector(_CONSTANTS.tocs);
-        
+
         tocs.classList.toggle('active');
 
+    }
+
+}
+
+class SessionStorage {
+
+    static _returnDefault() {
+        return {
+            category: 'atoms',
+            deviceSize: 'full'
+        };
+    }
+
+    static _getSelectedCategory() {
+
+        let curSelected = document.querySelector(_CONSTANTS.dmAtomicFilter + '.selected');
+
+        if (curSelected !== null &&
+            curSelected.dataset !== null &&
+            curSelected.dataset.filter !== null) {
+
+            return curSelected.dataset.filter !== null ? curSelected.dataset.filter : 'atoms';
+
+        } else {
+
+            return 'atoms';
+
+        }
+
+    }
+
+    static _getSelectedDeviceSize() {
+
+        let curSelected = document.querySelector(_CONSTANTS.dmDeviceTypes + '.selected');
+
+        if (curSelected !== null &&
+            curSelected.dataset !== null &&
+            curSelected.dataset.size !== null) {
+
+            return curSelected.dataset.size !== null ? curSelected.dataset.size : 'full';;
+
+        } else {
+
+            return 'full';
+
+        }
+
+    }
+
+    static updateStatus(updates) {
+
+        let defaultSession = this._returnDefault();
+
+        let stylezSession = sessionStorage.getItem('stylez');
+
+        if (stylezSession === undefined ||
+            stylezSession === null) {
+
+            sessionStorage.setItem('stylez', JSON.stringify(defaultSession));
+
+            this._getSelectedCategory();
+            this._getSelectedDeviceSize();
+
+        } else {
+
+            let newStatus = JSON.parse(stylezSession);
+
+            newStatus.category = this._getSelectedCategory();
+            newStatus.deviceSize = this._getSelectedDeviceSize();
+
+            sessionStorage.setItem('stylez', JSON.stringify(newStatus));
+
+            this._getSelectedCategory();
+            this._getSelectedDeviceSize();
+
+        }
+
+    }
+
+    static setCurrentFilter() {
+
+        let curStatus = sessionStorage.getItem('stylez') !== undefined ?
+            JSON.parse(sessionStorage.getItem('stylez')) : this._returnDefault();
+
+        console.log(`button[data-filter=${curStatus.category}]`);
+        console.log(`button[data-size="${curStatus.deviceSize}"]`);
+
+        let categoryFilter = document.querySelector(`button[data-filter="${curStatus.category}"]`);
+        categoryFilter.classList.add('selected');
+        categoryFilter.click();
+
+        let deviceFilter = document.querySelector(`button[data-size="${curStatus.deviceSize}"]`);
+        deviceFilter.classList.add('selected');
+        deviceFilter.click();
 
     }
 
@@ -97,22 +200,23 @@ class Stylez {
         // register category filters
         this.btnsCatFilter = document.querySelectorAll(this.CONSTANTS.dmAtomicFilter);
         this.btnsCatFilter.forEach((btn) => {
-            btn.addEventListener('click', this.Events.filterCategories);
+            btn.addEventListener('click', Events.filterCategories);
         });
 
         // register device types
         this.btnDeviceSelector = document.querySelectorAll(this.CONSTANTS.dmDeviceTypes);
         this.btnDeviceSelector.forEach((btn) => {
-            btn.addEventListener('click', this.Events.filterDeviceType);
+            btn.addEventListener('click', Events.filterDeviceType);
         });
 
-        window.addEventListener('resize', this.Events.setWidth);
+        window.addEventListener('resize', Events.setWidth);
         // set the initial width
-        this.Events.setWidth(null);
-
+        Events.setWidth(null);
 
         this.btnTocs = document.querySelector(this.CONSTANTS.dmFilterTocs);
-        this.btnTocs.addEventListener('click', this.Events.toggleTocs);
+        this.btnTocs.addEventListener('click', Events.toggleTocs);
+
+        SessionStorage.setCurrentFilter();
 
     }
 
