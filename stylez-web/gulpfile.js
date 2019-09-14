@@ -19,6 +19,10 @@ const isDev = !isProd && !isTest;
 const webpack = require('webpack')
 const webpackConfig = require('./webpack.config.js')
 
+const genconfig = require('stylez-tasks');
+
+console.log(genconfig);
+
 
 // Import Gulp plugins.
 const babel = require('gulp-babel');
@@ -37,10 +41,15 @@ const serve = (cb) => {
     watch(['src/web/**/*.scss'], styles);
     watch(['src/web/**/*.js'], scripts);
     watch([
-        'src/web/**/*.html',
-        'src/images/**/*'
-    ], html)
-    .on('change', server.reload);
+            'src/web/**/*.html',
+            'src/images/**/*'
+        ], html)
+        .on('change', server.reload);
+
+    watch(['src/app/patterns/**/*.hbs'])
+        .on('add', genconfig.added)
+        .on('change', genconfig.changed)
+        .on('unlink', genconfig.deleted)
 
     cb();
 
@@ -78,24 +87,8 @@ const scripts = () => {
 }
 
 const html = () => {
-
     return src('src/web/**/*.html')
         .pipe(dest('.tmp/web'));
 }
-
-// const assets = (cb) => {
-//     // run webpack
-//     return new Promise((resolve, reject) => {
-//         webpack(webpackConfig, (err, stats) => {
-//             if (err) {
-//                 return reject(err)
-//             }
-//             if (stats.hasErrors()) {
-//                 return reject(new Error(stats.compilation.errors.join('\n')))
-//             }
-//             resolve()
-//         })
-//     })
-// }
 
 exports.serve = series(html, styles, scripts, serve);

@@ -1,0 +1,46 @@
+{
+    "patterns": [
+        {
+            "title": "001",
+            "name": "001.hbs",
+            "file": "src/app/patterns/001.hbs",
+            "category": "patterns"
+        },
+        {
+            "title": "001",
+            "name": "001.hbs",
+            "file": "src/app/patterns/001.hbs",
+            "category": "patterns"
+        },
+        {
+            "title": "002",
+            "name": "002.hbs",
+            "file": "src/app/patterns/002.hbs",
+            "category": "patterns"
+        },
+        {
+            "title": "002",
+            "name": "002.hbs",
+            "file": "src/app/patterns/002.hbs",
+            "category": "patterns"
+        },
+        {
+            "title": "003",
+            "name": "003.hbs",
+            "file": "src/app/patterns/003.hbs",
+            "category": "patterns"
+        },
+        {
+            "title": "000",
+            "name": "000.hbs",
+            "file": "src/app/patterns/000.hbs",
+            "category": "patterns"
+        },
+        {
+            "title": "002",
+            "name": "002.hbs",
+            "file": "src/app/patterns/002.hbs",
+            "category": "patterns"
+        }
+    ]
+}

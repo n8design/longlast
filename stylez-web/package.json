@@ -1,5 +1,5 @@
 {
-  "name": "stylez",
+  "name": "stylez-web",
   "version": "0.0.1",
   "description": "Stylez is just a Style Guide",
   "main": "index.js",
@@ -23,7 +23,8 @@
     "gulp-plumber": "^1.2.1",
     "gulp-postcss": "^8.0.0",
     "gulp-sass": "^4.0.2",
-    "gulp-sourcemaps": "^2.6.5"
+    "gulp-sourcemaps": "^2.6.5",
+    "stylez-tasks": "file:../stylez-tasks"
   },
   "browserslist": [
     "> 1%",
