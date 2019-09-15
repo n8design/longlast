@@ -5,6 +5,7 @@ const {
     watch,
     series
 } = require('gulp');
+
 const browserSync = require('browser-sync');
 const reload = browserSync.reload;
 const gulpLoadPlugins = require('gulp-load-plugins');
@@ -19,10 +20,10 @@ const isDev = !isProd && !isTest;
 const webpack = require('webpack')
 const webpackConfig = require('./webpack.config.js')
 
-const genconfig = require('stylez-tasks');
-
-console.log(genconfig);
-
+const {
+    configGenerator,
+    hbsCompiler
+} = require('stylez-tasks');
 
 // Import Gulp plugins.
 const babel = require('gulp-babel');
@@ -35,7 +36,8 @@ const serve = (cb) => {
         server: {
             baseDir: '.tmp/web/',
             directory: true
-        }
+        },
+        open: false // remove if browser should open
     });
 
     watch(['src/web/**/*.scss'], styles);
@@ -47,9 +49,18 @@ const serve = (cb) => {
         .on('change', server.reload);
 
     watch(['src/app/patterns/**/*.hbs'])
-        .on('add', genconfig.added)
-        .on('change', genconfig.changed)
-        .on('unlink', genconfig.deleted)
+        .on('add', (path) => {
+            configGenerator.added(path);
+            hbsCompiler.compile(path, './temp');
+        })
+        .on('change', (path) => {
+            configGenerator.changed(path);
+            hbsCompiler.compile(path, './temp');
+        })
+        .on('unlink', (path) => {
+            configGenerator.deleted(path);
+            hbsCompiler.compile(path, './temp');
+        });
 
     cb();
 
@@ -90,5 +101,7 @@ const html = () => {
     return src('src/web/**/*.html')
         .pipe(dest('.tmp/web'));
 }
+
+configGenerator.statupCheck();
 
 exports.serve = series(html, styles, scripts, serve);

@@ -1,0 +1,1 @@
+{"version":3,"names":[],"mappings":"","sources":["tasks/stylez-genhbs.js"],"sourcesContent":["const path = require('path');\nconst fs = require('fs');\n\nclass GenHandlebars{\n\n\n}\n\nmodule.exports = GenHandlebars;"],"file":"stylez-genhbs.js"}

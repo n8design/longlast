@@ -1,0 +1,1 @@
+{"version":3,"names":[],"mappings":"","sources":["configgenerator.js"],"sourcesContent":["module.exports = require('./tasks/stylez.genconfig.js');"],"file":"configgenerator.js"}

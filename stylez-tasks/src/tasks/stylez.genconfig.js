@@ -1,8 +1,11 @@
 // const fs = require('fs');
 const path = require('path');
+const log = require('fancy-log');
+const chalk = require('chalk');
 const fs = require('fs');
 
 const configPath = path.resolve('./src/app/config/stylez.json');
+const cwd = process.cwd();
 
 const patternItem = {
     title: '',
@@ -14,7 +17,7 @@ const patternItem = {
 const defaultConfig = {
     patterns: []
 };
-
+// Load current configuration file
 const loadConfig = () => {
 
     const config = configPath;
@@ -31,7 +34,7 @@ const loadConfig = () => {
 
         } catch (error) {
 
-            console.log(error);
+            log(error.ERROR);
 
         }
 
@@ -42,7 +45,7 @@ const loadConfig = () => {
     }
 
 };
-
+// Load save changed configuraiton file
 const saveConfig = (newConfig) => {
 
     const config = configPath;
@@ -55,19 +58,124 @@ const saveConfig = (newConfig) => {
 
     } catch (error) {
 
-        console.log(error);
+        log.error(error);
 
     }
 
 };
 
-const showStats = () => {
-    console.log(this);
+const addItem = (config, file) => {
+
+    // get base extension 'hbs'
+    let extension = path.extname(file);
+
+    // get filename
+    let filename = path.basename(file);
+
+    // get path trail to file
+    let dirTrail = path.dirname(file).split(path.sep);
+
+    // create new Pattern Item
+    let curPatternItem = patternItem;
+
+    // define new values for pattern
+    curPatternItem.file = file;
+    curPatternItem.category = dirTrail.pop().split('-').pop();
+    curPatternItem.title = filename.split(extension).shift();
+    curPatternItem.name = filename;
+
+    // Push in a new item
+    config.patterns.push(curPatternItem);
+
+    return config;
+
+};
+
+// calculate current statistics
+const showStats = (configuration) => {
+
+    const stats = {
+        atoms: 0,
+        molecules: 0,
+        organism: 0,
+        templates: 0,
+        pages: 0,
+        sum: 0
+    };
+
+
+    if (configuration !== null && configuration !== undefined &&
+        configuration.patterns !== null && configuration.patterns !== undefined) {
+
+        configuration
+            .patterns
+            .forEach(item => {
+
+                switch (item.category) {
+                    case 'atoms':
+                        stats.atoms += 1;
+                        break;
+                    case 'molecules':
+                        stats.molecules += 1;
+                        break;
+                    case 'organism':
+                        stats.organism += 1;
+                        break;
+                    case 'templates':
+                        stats.templates += 1;
+                        break;
+                    case 'pages':
+                        stats.pages += 1;
+                        break;
+
+                    default:
+                        break;
+                }
+
+                stats.sum += 1;
+
+            });
+
+        printStats(stats);
+
+    }
+
+};
+
+const printStats = (stats) => {
+
+    log.info(
+        chalk.bold('Statistics:')
+    );
+
+    log.info(
+        'Overall: ',
+        chalk.green(stats.sum),
+        'Patterns'
+    );
+
+    log.info(
+        chalk.bold('Details: '),
+        chalk.green(stats.atoms), 'Atoms,',
+        chalk.green(stats.molecules), 'Molecules,',
+        chalk.green(stats.organism), 'Organism,',
+        chalk.green(stats.templates), 'Templates,',
+        chalk.green(stats.pages), 'Pages'
+    );
+
 };
 
 class Genconfig {
 
     static changed(affectedFile) {
+
+        // get file extension for removal
+        let extension = path.extname(affectedFile);
+
+        // just in case the current file is not an hbs
+        if (extension.toLocaleLowerCase() !== '.hbs') {
+            return;
+        }
 
         let curConfig = loadConfig();
 
@@ -77,27 +185,11 @@ class Genconfig {
 
         });
 
-        if (exists.length === null) {
+        if (exists.length === 0) {
 
-            let filename = path.basename(affectedFile);
+            curConfig = addItem(curConfig, affectedFile);
 
-            // Getting Path Trail
-            let dirTrail = path.dirname(affectedFile).split(path.sep);
-
-            // File Extension
-            let extension = path.extname(affectedFile);
-
-            // create new Pattern Item
-            let curPatternItem = patternItem;
-
-            // define new values for pattern
-            curPatternItem.file = affectedFile;
-            curPatternItem.category = dirTrail.pop();
-            curPatternItem.title = filename.split(extension).shift();
-            curPatternItem.name = filename;
-
-
-            curConfig.patterns.push(curPatternItem);
+            log(curConfig);
 
             saveConfig(curConfig);
 
@@ -105,7 +197,11 @@ class Genconfig {
 
         } else {
 
-            console.log('Changed Show Stats');
+            log.info(
+                chalk.bold('Changed File:'),
+                chalk.green(path.basename(affectedFile))
+            );
+
             showStats(curConfig);
 
         }
@@ -115,16 +211,80 @@ class Genconfig {
     static added(affectedFile) {
 
         let curConfig = loadConfig();
-        console.log('ADded', affectedFile);
+        log('File added:', affectedFile);
+
+        curConfig = addItem(curConfig, affectedFile);
+
+        saveConfig(curConfig);
 
         showStats(curConfig);
+
     }
 
     static deleted(affectedFile) {
+
         let curConfig = loadConfig();
-        console.log('DELETED ::::', affectedFile);
+
+        log(curConfig);
+
+        let newConfig = defaultConfig;
+
+        newConfig.patterns = curConfig.patterns.filter(item => item.file !== affectedFile);
+
+        log(newConfig);
+
+        saveConfig(newConfig);
 
         showStats(curConfig);
+
+    }
+
+    static statupCheck() {
+
+        log.info(chalk.bold('Startup Check:'));
+
+        let curConfig = loadConfig();
+
+        if (curConfig === undefined || curConfig.patterns === undefined) {
+
+            log.error(
+                chalk.red('There is an issue in '),
+                'stylez.json'
+            );
+
+            log.error(
+                chalk.bold('Startup Check:'),
+                chalk.red('... Failed')
+            );
+
+            // Exit all
+            process.exit();
+
+        }
+
+        let checkedConfig = curConfig.patterns.filter(item => {
+
+            let curFile = path.resolve(path.join(cwd, item.file));
+
+            if (fs.existsSync(curFile)) {
+
+                return true;
+
+            } else {
+
+                return false;
+
+            }
+
+        });
+
+        curConfig.patterns = checkedConfig;
+
+        saveConfig(curConfig);
+
+        showStats(curConfig);
+
+        log.info(chalk.bold('Startup Check:'), chalk.green(' ... OK'));
 
     }
 
