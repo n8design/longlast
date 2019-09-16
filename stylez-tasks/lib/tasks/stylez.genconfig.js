@@ -50,6 +50,22 @@ const saveConfig = (newConfig) => {
 
     const config = configPath;
 
+    newConfig.patterns = newConfig.patterns.sort((a, b) => {
+
+        if (a.file > b.file) {
+
+            return 1;
+
+        } else if (a.file > b.file) {
+
+            return -1;
+
+        }
+
+        return 0;
+
+    })
+
     try {
 
         const newConfigContent = JSON.stringify(newConfig, null, 4);

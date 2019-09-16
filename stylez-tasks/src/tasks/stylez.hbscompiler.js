@@ -21,15 +21,12 @@ const hbsOptions = {
     handlebars: require('handlebars')
 };
 
-const namespace = 'stylez.hbs';
+const templateNamespace = 'stylez.templates';
 
 class HbsCompiler {
 
 
     static compile(src, dest) {
-
-        console.log(src, dest);
-        console.log('Compile HBS');
 
         let partials = gulp.src(src)
             .pipe($.plumber())
@@ -56,14 +53,13 @@ class HbsCompiler {
             .pipe(wrap('Handlebars.template(<%= contents %>)'))
             // namespace
             .pipe(declare({
-                namespace: namespace,
+                namespace: templateNamespace,
                 noRedeclare: true
             }));
-
         // return merge
         return merge(partials, templates)
             // concat
-            .pipe(concat(namespace + '.js'))
+            .pipe(concat(templateNamespace + '.js'))
             // build
             .pipe(gulp.dest(dest));
 

@@ -1,15 +1,16 @@
 {
-  "presets": ["@babel/preset-env"],
-  "plugins": [
-    ["transform-imports", {
-      "react-bootstrap": {
-        "transform": "react-bootstrap/lib/${member}",
-        "preventFullImport": true
-      },
-      "lodash": {
-        "transform": "lodash/${member}",
-        "preventFullImport": true
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "browsers": ["> 1%"]
+        },
+        "useBuiltIns": "entry",
+        "corejs": 3,
+        "modules": "cjs",
+        "debug": true
       }
-    }]
+    ]
   ]
 }

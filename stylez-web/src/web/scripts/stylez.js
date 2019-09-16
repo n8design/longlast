@@ -175,9 +175,6 @@ class SessionStorage {
         let curStatus = sessionStorage.getItem('stylez') !== undefined ?
             JSON.parse(sessionStorage.getItem('stylez')) : this._returnDefault();
 
-        console.log(`button[data-filter=${curStatus.category}]`);
-        console.log(`button[data-size="${curStatus.deviceSize}"]`);
-
         let categoryFilter = document.querySelector(`button[data-filter="${curStatus.category}"]`);
         categoryFilter.classList.add('selected');
         categoryFilter.click();
@@ -223,7 +220,3 @@ class Stylez {
 }
 
 const ui = new Stylez;
-
-console.log(Stylez);
-console.log(ui.CONSTANTS);
-console.log(ui.storage);

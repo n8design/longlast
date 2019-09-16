@@ -17,8 +17,7 @@ const isProd = process.env.NODE_ENV === 'production';
 const isTest = process.env.NODE_ENV === 'test';
 const isDev = !isProd && !isTest;
 
-const webpack = require('webpack')
-const webpackConfig = require('./webpack.config.js')
+const webpackStream = require('webpack-stream');
 
 const {
     configGenerator,
@@ -35,7 +34,11 @@ const serve = (cb) => {
         notify: false,
         server: {
             baseDir: '.tmp/web/',
-            directory: true
+            directory: true,
+            routes: {
+                '/app': './src/app/',
+                '/node_modules': 'node_modules'
+            }
         },
         open: false // remove if browser should open
     });
@@ -51,20 +54,32 @@ const serve = (cb) => {
     watch(['src/app/patterns/**/*.hbs'])
         .on('add', (path) => {
             configGenerator.added(path);
-            hbsCompiler.compile(path, './temp');
+            hbsCompiler.compile(path, './.tmp/web/scripts/');
+            server.reload;
         })
         .on('change', (path) => {
             configGenerator.changed(path);
-            hbsCompiler.compile(path, './temp');
+            hbsCompiler.compile(path, './.tmp/web/scripts/');
+            server.reload;
         })
         .on('unlink', (path) => {
             configGenerator.deleted(path);
-            hbsCompiler.compile(path, './temp');
+            hbsCompiler.compile(path, './.tmp/web/scripts/');
+            server.reload;
         });
 
     cb();
 
 };
+
+const webpack = () => {
+
+    return gulp.src('build/')
+        .pipe(
+            webpackStream(require('./webpack.config.js')))
+        .pipe(dest('.tmp/web/scripts'));
+
+}
 
 const styles = () => {
     return src('src/**/*.scss')
@@ -91,7 +106,7 @@ const scripts = () => {
         .pipe($.if(!isProd, $.sourcemaps.init()))
         .pipe($.babel())
         .pipe($.if(!isProd, $.sourcemaps.write('.')))
-        .pipe(dest('.tmp'))
+        .pipe(dest('build'))
         .pipe(server.reload({
             stream: true
         }));
@@ -104,4 +119,5 @@ const html = () => {
 
 configGenerator.statupCheck();
 
-exports.serve = series(html, styles, scripts, serve);
+exports.serve = series(html, styles, series(scripts, webpack), serve);
+exports.default = serve;
