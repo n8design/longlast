@@ -1,6 +1,6 @@
 {
   "name": "stylez-web",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Stylez is just a Style Guide",
   "main": "index.js",
   "scripts": {
