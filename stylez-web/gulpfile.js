@@ -38,7 +38,8 @@ const serve = (cb) => {
             routes: {
                 '/app': './src/app/',
                 '/node_modules': 'node_modules'
-            }
+            },
+            https: true
         },
         open: false // remove if browser should open
     });
@@ -54,18 +55,18 @@ const serve = (cb) => {
     watch(['src/app/patterns/**/*.hbs'])
         .on('add', (path) => {
             configGenerator.added(path);
-            hbsCompiler.compile(path, './.tmp/web/scripts/');
-            server.reload;
+            hbsCompiler.compile('src/app/patterns/**/*.hbs', './.tmp/web/scicpts/');
+            server.reload();
         })
         .on('change', (path) => {
             configGenerator.changed(path);
-            hbsCompiler.compile(path, './.tmp/web/scripts/');
-            server.reload;
+            hbsCompiler.compile('src/app/patterns/**/*.hbs', './.tmp/web/scripts/');
+            server.reload();
         })
         .on('unlink', (path) => {
             configGenerator.deleted(path);
-            hbsCompiler.compile(path, './.tmp/web/scripts/');
-            server.reload;
+            hbsCompiler.compile('src/app/patterns/**/*.hbs', './.tmp/web/scripts/');
+            server.reload();
         });
 
     cb();
@@ -74,7 +75,7 @@ const serve = (cb) => {
 
 const webpack = () => {
 
-    return gulp.src('build/')
+    return src('build/')
         .pipe(
             webpackStream(require('./webpack.config.js')))
         .pipe(dest('.tmp/web/scripts'));
@@ -104,9 +105,9 @@ const scripts = () => {
     return src('src/**/*.js')
         .pipe($.plumber())
         .pipe($.if(!isProd, $.sourcemaps.init()))
-        .pipe($.babel())
+        // .pipe($.babel())
         .pipe($.if(!isProd, $.sourcemaps.write('.')))
-        .pipe(dest('build'))
+        .pipe(dest('.tmp/'))
         .pipe(server.reload({
             stream: true
         }));
@@ -119,5 +120,5 @@ const html = () => {
 
 configGenerator.statupCheck();
 
-exports.serve = series(html, styles, series(scripts, webpack), serve);
+exports.serve = series(html, styles, scripts, serve);
 exports.default = serve;

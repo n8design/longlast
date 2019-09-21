@@ -1,0 +1,19 @@
+// base variables
+@import '00-base/b-vars';
+// @import '00-base/b-base';
+
+@mixin mainfont {
+    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+body{
+    margin: 0;
+}
+
+// atoms
+@import '01-atoms/a-pattern-title';
+@import '01-atoms/a-pattern-filename';
+@import '01-atoms/a-pattern-content';
+@import '01-atoms/a-pattern-code';
+// molecules
+@import '02-molecules/m-pattern';
+@import '02-molecules/m-pattern-header';

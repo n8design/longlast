@@ -172,8 +172,9 @@ class SessionStorage {
 
     static setCurrentFilter() {
 
-        let curStatus = sessionStorage.getItem('stylez') !== undefined ?
-            JSON.parse(sessionStorage.getItem('stylez')) : this._returnDefault();
+
+        let curStatus = sessionStorage.getItem('stylez') !== null ?
+            JSON.parse(sessionStorage.getItem('stylez')) : SessionStorage._returnDefault();
 
         let categoryFilter = document.querySelector(`button[data-filter="${curStatus.category}"]`);
         categoryFilter.classList.add('selected');

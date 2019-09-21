@@ -1,58 +1,70 @@
 {
     "patterns": [
         {
-            "title": "000",
-            "name": "000.hbs",
-            "file": "src/app/patterns/01-atoms/000.hbs",
+            "title": "a-004",
+            "name": "a-004.hbs",
+            "file": "src/app/patterns/01-atoms/a-004.hbs",
             "category": "atoms"
         },
         {
-            "title": "001",
-            "name": "001.hbs",
-            "file": "src/app/patterns/01-atoms/001.hbs",
+            "title": "a-005",
+            "name": "a-005.hbs",
+            "file": "src/app/patterns/01-atoms/a-005.hbs",
             "category": "atoms"
         },
         {
-            "title": "002",
-            "name": "002.hbs",
-            "file": "src/app/patterns/01-atoms/002.hbs",
+            "title": "a-001",
+            "name": "a-001.hbs",
+            "file": "src/app/patterns/01-atoms/a-001.hbs",
             "category": "atoms"
         },
         {
-            "title": "003",
-            "name": "003.hbs",
-            "file": "src/app/patterns/01-atoms/003.hbs",
+            "title": "a-002",
+            "name": "a-002.hbs",
+            "file": "src/app/patterns/01-atoms/a-002.hbs",
             "category": "atoms"
         },
         {
-            "title": "004",
-            "name": "004.hbs",
-            "file": "src/app/patterns/01-atoms/004.hbs",
+            "title": "a-003",
+            "name": "a-003.hbs",
+            "file": "src/app/patterns/01-atoms/a-003.hbs",
             "category": "atoms"
         },
         {
-            "title": "005",
-            "name": "005.hbs",
-            "file": "src/app/patterns/01-atoms/005.hbs",
+            "title": "a-000",
+            "name": "a-000.hbs",
+            "file": "src/app/patterns/01-atoms/a-000.hbs",
             "category": "atoms"
         },
         {
-            "title": "000",
-            "name": "000.hbs",
-            "file": "src/app/patterns/02-molecules/000.hbs",
+            "title": "a-006",
+            "name": "a-006.hbs",
+            "file": "src/app/patterns/01-atoms/a-006.hbs",
+            "category": "atoms"
+        },
+        {
+            "title": "m-000",
+            "name": "m-000.hbs",
+            "file": "src/app/patterns/02-molecules/m-000.hbs",
             "category": "molecules"
         },
         {
-            "title": "000",
-            "name": "000.hbs",
-            "file": "src/app/patterns/03-organism/000.hbs",
+            "title": "o-000",
+            "name": "o-000.hbs",
+            "file": "src/app/patterns/03-organism/o-000.hbs",
             "category": "organism"
         },
         {
-            "title": "000",
-            "name": "000.hbs",
-            "file": "src/app/patterns/04-templates/000.hbs",
+            "title": "t-000",
+            "name": "t-000.hbs",
+            "file": "src/app/patterns/04-templates/t-000.hbs",
             "category": "templates"
+        },
+        {
+            "title": "p-001",
+            "name": "p-001.hbs",
+            "file": "src/app/patterns/05-pages/p-001.hbs",
+            "category": "pages"
         }
     ]
 }

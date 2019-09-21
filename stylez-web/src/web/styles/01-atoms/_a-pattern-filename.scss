@@ -1,0 +1,11 @@
+.viewer-filename{
+	@extend .viewer-title;
+
+    font-size: .8em;
+    line-height: 2em;
+	font-weight: normal;
+
+	margin-right: 1em;
+    padding-top: .25em;
+    font-family: 'Courier New', Courier, monospace;
+}
