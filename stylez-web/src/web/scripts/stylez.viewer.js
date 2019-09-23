@@ -1,3 +1,5 @@
+import * as Stylez from './stylez.js';
+
 const fetchPattern = async () => {
 
     console.log('Started');
@@ -30,6 +32,7 @@ let pattern = fetchPattern();
 
 pattern.then(data => {
 
+    console.log(Stylez);
 
     let patterns = data.patterns.sort((a, b) => {
         if (a.file < b.file) {
@@ -41,9 +44,12 @@ pattern.then(data => {
         return 0;
     })
 
-    patterns.forEach(pattern => {
+    var curSession = Stylez.SessionStorage.getCurrentFilter();
 
-        console.log(pattern.title);
+    console.log('SESSION :::: ', curSession);
+
+
+    patterns.forEach(pattern => {
 
         const patternsContainer = document.querySelector('.patterns');
 

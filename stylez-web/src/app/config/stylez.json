@@ -1,15 +1,15 @@
 {
     "patterns": [
         {
-            "title": "a-004",
-            "name": "a-004.hbs",
-            "file": "src/app/patterns/01-atoms/a-004.hbs",
+            "title": "a-000",
+            "name": "a-000.hbs",
+            "file": "src/app/patterns/01-atoms/a-000.hbs",
             "category": "atoms"
         },
         {
-            "title": "a-005",
-            "name": "a-005.hbs",
-            "file": "src/app/patterns/01-atoms/a-005.hbs",
+            "title": "a-004",
+            "name": "a-004.hbs",
+            "file": "src/app/patterns/01-atoms/a-004.hbs",
             "category": "atoms"
         },
         {
@@ -31,9 +31,9 @@
             "category": "atoms"
         },
         {
-            "title": "a-000",
-            "name": "a-000.hbs",
-            "file": "src/app/patterns/01-atoms/a-000.hbs",
+            "title": "a-005",
+            "name": "a-005.hbs",
+            "file": "src/app/patterns/01-atoms/a-005.hbs",
             "category": "atoms"
         },
         {

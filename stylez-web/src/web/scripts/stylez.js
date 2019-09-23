@@ -10,7 +10,7 @@ const _CONSTANTS = {
     curHeight: '.a-input.js-curHeight',
 }
 
-class Events {
+export class Events {
 
     static _toggleButtons(btnList, curButton) {
 
@@ -76,10 +76,16 @@ class Events {
         setTimeout(() => {
 
             let curWidth = document.querySelector(_CONSTANTS.curWidth);
-            curWidth.value = window.innerWidth;
+
+            if (curWidth !== null && curWidth !== undefined) {
+                curWidth.value = window.innerWidth;
+            }
 
             let curHeight = document.querySelector(_CONSTANTS.curHeight);
-            curHeight.value = window.innerHeight;
+
+            if (curHeight !== null && curHeight !== undefined) {
+                curHeight.value = window.innerHeight;
+            }
 
         }, 250);
 
@@ -95,7 +101,7 @@ class Events {
 
 }
 
-class SessionStorage {
+export class SessionStorage {
 
     static _returnDefault() {
         return {
@@ -177,18 +183,31 @@ class SessionStorage {
             JSON.parse(sessionStorage.getItem('stylez')) : SessionStorage._returnDefault();
 
         let categoryFilter = document.querySelector(`button[data-filter="${curStatus.category}"]`);
-        categoryFilter.classList.add('selected');
-        categoryFilter.click();
+        if (categoryFilter !== null && categoryFilter !== undefined) {
+            categoryFilter.classList.add('selected');
+            categoryFilter.click();
+        }
 
         let deviceFilter = document.querySelector(`button[data-size="${curStatus.deviceSize}"]`);
-        deviceFilter.classList.add('selected');
-        deviceFilter.click();
+        if (deviceFilter !== null && deviceFilter !== undefined) {
+            deviceFilter.classList.add('selected');
+            deviceFilter.click();
+        }
+
+    }
+
+    static getCurrentFilter() {
+
+        let curStatus = sessionStorage.getItem('stylez') !== null ?
+            JSON.parse(sessionStorage.getItem('stylez')) : SessionStorage._returnDefault();
+
+        return curStatus;
 
     }
 
 }
 
-class Stylez {
+export class Stylez {
 
     constructor() {
         // init internamels
@@ -212,7 +231,11 @@ class Stylez {
         Events.setWidth(null);
 
         this.btnTocs = document.querySelector(this.CONSTANTS.dmFilterTocs);
-        this.btnTocs.addEventListener('click', Events.toggleTocs);
+        if (this.btnTocs !== null && this.btnTocs !== null) {
+
+            this.btnTocs.addEventListener('click', Events.toggleTocs);
+
+        }
 
         SessionStorage.setCurrentFilter();
 
