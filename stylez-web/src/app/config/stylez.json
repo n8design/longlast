@@ -7,9 +7,9 @@
             "category": "atoms"
         },
         {
-            "title": "a-004",
-            "name": "a-004.hbs",
-            "file": "src/app/patterns/01-atoms/a-004.hbs",
+            "title": "a-006",
+            "name": "a-006.hbs",
+            "file": "src/app/patterns/01-atoms/a-006.hbs",
             "category": "atoms"
         },
         {
@@ -31,15 +31,21 @@
             "category": "atoms"
         },
         {
+            "title": "a-004",
+            "name": "a-004.hbs",
+            "file": "src/app/patterns/01-atoms/a-004.hbs",
+            "category": "atoms"
+        },
+        {
             "title": "a-005",
             "name": "a-005.hbs",
             "file": "src/app/patterns/01-atoms/a-005.hbs",
             "category": "atoms"
         },
         {
-            "title": "a-006",
-            "name": "a-006.hbs",
-            "file": "src/app/patterns/01-atoms/a-006.hbs",
+            "title": "a-007",
+            "name": "a-007.hbs",
+            "file": "src/app/patterns/01-atoms/a-007.hbs",
             "category": "atoms"
         },
         {

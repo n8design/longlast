@@ -1,4 +1,4 @@
-import * as Stylez from './stylez.js';
+const Stylez =  require('./stylez.js');
 
 const fetchPattern = async () => {
 
@@ -48,8 +48,12 @@ pattern.then(data => {
 
     console.log('SESSION :::: ', curSession);
 
+    let currentPatterns = patterns.filter(item => {
+        return item.category === curSession.category;
+    });
 
-    patterns.forEach(pattern => {
+
+    currentPatterns.forEach(pattern => {
 
         const patternsContainer = document.querySelector('.patterns');
 

@@ -24,9 +24,9 @@ const {
     hbsCompiler
 } = require('stylez-tasks');
 
-// Import Gulp plugins.
-const babel = require('gulp-babel');
-const plumber = require('gulp-plumber');
+// // Import Gulp plugins.
+// const babel = require('gulp-babel');
+// const plumber = require('gulp-plumber');
 
 const serve = (cb) => {
 
@@ -45,7 +45,7 @@ const serve = (cb) => {
     });
 
     watch(['src/web/**/*.scss'], styles);
-    watch(['src/web/**/*.js'], scripts);
+    watch(['src/web/**/*.js'], series(scripts, webpack));
     watch([
             'src/web/**/*.html',
             'src/images/**/*'
@@ -55,27 +55,36 @@ const serve = (cb) => {
     watch(['src/app/patterns/**/*.hbs'])
         .on('add', (path) => {
             configGenerator.added(path);
-            hbsCompiler.compile('src/app/patterns/**/*.hbs', './.tmp/web/scicpts/');
-            server.reload();
+            compileTemplates().then(() => {
+                server.reload();
+            })
+
         })
         .on('change', (path) => {
             configGenerator.changed(path);
-            hbsCompiler.compile('src/app/patterns/**/*.hbs', './.tmp/web/scripts/');
-            server.reload();
+            compileTemplates().then(() => {
+                server.reload();
+            })
         })
         .on('unlink', (path) => {
             configGenerator.deleted(path);
-            hbsCompiler.compile('src/app/patterns/**/*.hbs', './.tmp/web/scripts/');
-            server.reload();
+            compileTemplates().then(() => {
+                server.reload();
+            })
         });
 
     cb();
 
 };
 
+const compileTemplates = async () => {
+    return await hbsCompiler.compile('src/app/patterns/**/*.hbs', './.tmp/web/scripts/');
+}
+
 const webpack = () => {
 
-    return src('build/')
+    return src('lib/**/*.js')
+        .pipe($.plumber())
         .pipe(
             webpackStream(require('./webpack.config.js')))
         .pipe(dest('.tmp/web/scripts'));
@@ -101,16 +110,18 @@ const styles = () => {
         }));
 };
 
-const scripts = () => {
+const scripts = (cb) => {
+
     return src('src/**/*.js')
         .pipe($.plumber())
         .pipe($.if(!isProd, $.sourcemaps.init()))
-        // .pipe($.babel())
+        .pipe($.babel())
         .pipe($.if(!isProd, $.sourcemaps.write('.')))
-        .pipe(dest('.tmp/'))
+        .pipe(dest('./lib/'))
         .pipe(server.reload({
             stream: true
         }));
+
 }
 
 const html = () => {
@@ -120,5 +131,5 @@ const html = () => {
 
 configGenerator.statupCheck();
 
-exports.serve = series(html, styles, scripts, serve);
+exports.serve = series(html, styles, scripts, compileTemplates, serve);
 exports.default = serve;

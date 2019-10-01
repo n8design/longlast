@@ -41,6 +41,9 @@ export class Events {
 
         Events._toggleButtons(allButtons, curButton);
 
+        let iframe = document.querySelector(_CONSTANTS.viewerFrame);
+        iframe.contentWindow.location.href = "viewer.html"
+
     }
 
     // Handle deviceFiltering
