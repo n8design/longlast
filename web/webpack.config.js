@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
     mode: 'development',
-    stats: 'verbose',
+    // stats: 'verbose',
     entry: {
         'stylez': './lib/web/scripts/stylez.js',
         'stylez.viewer': './lib/web/scripts/stylez.viewer.js'

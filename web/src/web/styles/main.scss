@@ -4,11 +4,13 @@
 // atoms
 @import '01-atoms/a-button';
 @import '01-atoms/a-input';
+@import '01-atoms/a-filtername';
 // molecules
 @import '02-molecules/m-filters';
 @import '02-molecules/m-metrics';
 @import '02-molecules/m-devicetypes';
 @import '02-molecules/m-filtertocs';
+@import '02-molecules/m-itemslider';
 // organisms
 @import '03-organism/o-toolbar';
 @import '03-organism/o-viewer';

@@ -23,7 +23,7 @@
     "gulp-postcss": "^8.0.0",
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^2.6.5",
-    "stylez-tasks": "file:../stylez-tasks"
+    "stylez-tasks": "file:../tasks"
   },
   "browserslist": [
     "> 1%",

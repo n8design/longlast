@@ -13,5 +13,8 @@
 	&:active{
 		color: $c-black;
 		background-color: $c-yellow;
-	}
+    }
+    &:hover{
+        cursor: pointer;
+    }
 }
