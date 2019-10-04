@@ -7,7 +7,9 @@
 
 	border: 2px $c-black solid;
 	border-radius: 0;
-	background-color: $c-white;
+    background-color: $c-white;
+    display: inline-block;
+    width: fit-content;
 
 	&.selected,
 	&:active{

@@ -9,7 +9,8 @@ var Events = require('./stylez.events');
 export var Stylez = function Stylez() {
   _classCallCheck(this, Stylez);
 
-  // init internamels
+  window.addEventListener('storage', Events.detectStorageChange); // init internamels
+
   this.CONSTANTS = _CONSTANTS;
   this.Events = Events; // register category filters
 
@@ -33,15 +34,9 @@ export var Stylez = function Stylez() {
 
   this.btnPagers = document.querySelectorAll(this.CONSTANTS.pagers);
   this.btnPagers.forEach(function (pager) {
-    console.log(pager.dataset.filter);
     pager.addEventListener('click', Events.changeIndex);
   });
   SessionStorage.setCurrentFilter();
-  window.addEventListener('storage', function (event) {
-    console.log(event);
-    console.log('Something changed');
-    console.log(SessionStorage.getCurrentFilter());
-  });
 };
 var ui = new Stylez();
 //# sourceMappingURL=stylez.js.map

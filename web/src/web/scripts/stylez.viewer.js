@@ -2,12 +2,9 @@ const SessionStorage = require('./stylez.storage');
 
 const evalHTML = (partialHTML) => {
 
-    let htmlContent;
-
     try {
         let parser = new DOMParser();
         let fixedContent = parser.parseFromString(partialHTML, 'text/html');
-        console.log(fixedContent.body.childNodes);
 
         let partialDoc = new DocumentFragment();
         partialDoc.append(fixedContent.body);
@@ -40,7 +37,7 @@ const fetchPattern = async () => {
         })
         .catch(error => {
 
-            console.log('ERROR:::::', error);
+            console.error('ERROR:::::', error);
 
         })
 
@@ -49,8 +46,6 @@ const fetchPattern = async () => {
 let pattern = fetchPattern();
 
 pattern.then(data => {
-
-    console.log('DATA::::: ', data);
 
     let patterns = data.patterns.sort((a, b) => {
         if (a.file < b.file) {
@@ -71,15 +66,21 @@ pattern.then(data => {
     if (curSession.category === 'pages' ||
         curSession.category === 'templates') {
 
+        let currentFilter = SessionStorage.getCurrentFilter();
+
         if (currentPatterns.length !== 0) {
 
-            let currentFilter = SessionStorage.getCurrentFilter(),
-                curIndex = currentFilter.index ? currentFilter.index : 0;
+            let curIndex = currentFilter.index ? currentFilter.index : 0;
 
-            currentFilter.maxIndex = currentPatterns.length;
+            currentFilter.maxIndex = currentPatterns.length - 1;
             currentFilter.index = curIndex;
 
+            currentFilter.title = currentPatterns[curIndex].title;
+
             currentPatterns = [currentPatterns[curIndex]];
+
+            // let currentPatternTitle = document.querySelector('.a-filtername');
+            // currentPatternTitle.textContent = currentFilter.title;
 
             SessionStorage.updateStatus(currentFilter);
 
@@ -87,6 +88,9 @@ pattern.then(data => {
 
             currentFilter.maxIndex = null;
             currentFilter.index = null;
+            currentFilter.title = null;
+
+            SessionStorage.updateStatus(currentFilter);
 
         }
 
@@ -106,7 +110,7 @@ pattern.then(data => {
                 templateContent = curTemplate();
             } catch (error) {
                 console.error(`Error in Pattern ${pattern.title}: ${error.message}`);
-                templateContent = `Error in Pattern ${pattern.title}: ${error.message}`;   
+                templateContent = `Error in Pattern ${pattern.title}: ${error.message}`;
             }
 
             if (curTemplate !== undefined && templateContent !== 'undefined') {

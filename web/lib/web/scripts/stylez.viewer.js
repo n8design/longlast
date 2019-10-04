@@ -12,12 +12,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 var SessionStorage = require('./stylez.storage');
 
 var evalHTML = function evalHTML(partialHTML) {
-  var htmlContent;
-
   try {
     var parser = new DOMParser();
     var fixedContent = parser.parseFromString(partialHTML, 'text/html');
-    console.log(fixedContent.body.childNodes);
     var partialDoc = new DocumentFragment();
     partialDoc.append(fixedContent.body);
     return partialDoc.firstChild.innerHTML;
@@ -45,7 +42,7 @@ function () {
                 throw "Error current status: " + response.status + " - " + url;
               }
             }).catch(function (error) {
-              console.log('ERROR:::::', error);
+              console.error('ERROR:::::', error);
             }));
 
           case 2:
@@ -63,7 +60,6 @@ function () {
 
 var pattern = fetchPattern();
 pattern.then(function (data) {
-  console.log('DATA::::: ', data);
   var patterns = data.patterns.sort(function (a, b) {
     if (a.file < b.file) {
       return -1;
@@ -81,17 +77,22 @@ pattern.then(function (data) {
   });
 
   if (curSession.category === 'pages' || curSession.category === 'templates') {
-    if (currentPatterns.length !== 0) {
-      var _currentFilter = SessionStorage.getCurrentFilter(),
-          curIndex = _currentFilter.index ? _currentFilter.index : 0;
+    var currentFilter = SessionStorage.getCurrentFilter();
 
-      _currentFilter.maxIndex = currentPatterns.length;
-      _currentFilter.index = curIndex;
-      currentPatterns = [currentPatterns[curIndex]];
-      SessionStorage.updateStatus(_currentFilter);
+    if (currentPatterns.length !== 0) {
+      var curIndex = currentFilter.index ? currentFilter.index : 0;
+      currentFilter.maxIndex = currentPatterns.length - 1;
+      currentFilter.index = curIndex;
+      currentFilter.title = currentPatterns[curIndex].title;
+      currentPatterns = [currentPatterns[curIndex]]; // let currentPatternTitle = document.querySelector('.a-filtername');
+      // currentPatternTitle.textContent = currentFilter.title;
+
+      SessionStorage.updateStatus(currentFilter);
     } else {
       currentFilter.maxIndex = null;
       currentFilter.index = null;
+      currentFilter.title = null;
+      SessionStorage.updateStatus(currentFilter);
     }
   }
 

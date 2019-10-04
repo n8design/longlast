@@ -6,6 +6,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 var _CONSTANTS = require('./stylez.constants');
 
+var STORAGE = 'stylez';
+
 var SessionStorage =
 /*#__PURE__*/
 function () {
@@ -20,7 +22,8 @@ function () {
         category: 'atoms',
         deviceSize: 'full',
         index: null,
-        maxIndex: null
+        maxIndex: null,
+        title: null
       };
     }
   }, {
@@ -49,31 +52,36 @@ function () {
   }, {
     key: "updateStatus",
     value: function updateStatus(updates) {
-      var defaultSession = this._returnDefault();
+      if (updates === undefined) {
+        var defaultSession = this._returnDefault();
 
-      var stylezSession = sessionStorage.getItem('stylez');
+        var stylezSession = sessionStorage.getItem(STORAGE);
 
-      if (stylezSession === undefined || stylezSession === null) {
-        sessionStorage.setItem('stylez', JSON.stringify(defaultSession));
+        if (stylezSession === undefined || stylezSession === null) {
+          this._getSelectedCategory();
 
-        this._getSelectedCategory();
+          this._getSelectedDeviceSize();
 
-        this._getSelectedDeviceSize();
+          sessionStorage.setItem(STORAGE, JSON.stringify(defaultSession));
+        } else {
+          var newStatus = JSON.parse(stylezSession);
+          newStatus.category = this._getSelectedCategory();
+          newStatus.deviceSize = this._getSelectedDeviceSize();
+
+          this._getSelectedCategory();
+
+          this._getSelectedDeviceSize();
+
+          sessionStorage.setItem(STORAGE, JSON.stringify(newStatus));
+        }
       } else {
-        var newStatus = JSON.parse(stylezSession);
-        newStatus.category = this._getSelectedCategory();
-        newStatus.deviceSize = this._getSelectedDeviceSize();
-        sessionStorage.setItem('stylez', JSON.stringify(newStatus));
-
-        this._getSelectedCategory();
-
-        this._getSelectedDeviceSize();
+        sessionStorage.setItem(STORAGE, JSON.stringify(updates));
       }
     }
   }, {
     key: "setCurrentFilter",
     value: function setCurrentFilter() {
-      var curStatus = sessionStorage.getItem('stylez') !== null ? JSON.parse(sessionStorage.getItem('stylez')) : SessionStorage._returnDefault();
+      var curStatus = sessionStorage.getItem(STORAGE) !== null ? JSON.parse(sessionStorage.getItem(STORAGE)) : SessionStorage._returnDefault();
       var categoryFilter = document.querySelector("button[data-filter=\"".concat(curStatus.category, "\"]"));
 
       if (categoryFilter !== null && categoryFilter !== undefined) {
@@ -87,11 +95,21 @@ function () {
         deviceFilter.classList.add('selected');
         deviceFilter.click();
       }
+
+      var currentPatternTitle = document.querySelector('.a-filtername');
+      debugger;
+
+      if (curStatus.title !== null) {
+        currentPatternTitle.textContent = curStatus.title;
+      } else {
+        console.log('Helloooo');
+        currentPatternTitle.textContent = 'abc';
+      }
     }
   }, {
     key: "getCurrentFilter",
     value: function getCurrentFilter() {
-      var curStatus = sessionStorage.getItem('stylez') !== null ? JSON.parse(sessionStorage.getItem('stylez')) : SessionStorage._returnDefault();
+      var curStatus = sessionStorage.getItem(STORAGE) !== null ? JSON.parse(sessionStorage.getItem(STORAGE)) : SessionStorage._returnDefault();
       return curStatus;
     }
   }]);

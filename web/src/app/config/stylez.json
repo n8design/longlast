@@ -7,10 +7,10 @@
             "category": "atoms"
         },
         {
-            "title": "a-006",
-            "name": "a-006.hbs",
-            "file": "src/app/patterns/01-atoms/a-006.hbs",
-            "category": "atoms"
+            "title": "m-000",
+            "name": "m-000.hbs",
+            "file": "src/app/patterns/02-molecules/m-000.hbs",
+            "category": "molecules"
         },
         {
             "title": "a-000",
@@ -43,21 +43,27 @@
             "category": "atoms"
         },
         {
+            "title": "a-006",
+            "name": "a-006.hbs",
+            "file": "src/app/patterns/01-atoms/a-006.hbs",
+            "category": "atoms"
+        },
+        {
             "title": "a-005",
             "name": "a-005.hbs",
             "file": "src/app/patterns/01-atoms/a-005.hbs",
             "category": "atoms"
         },
         {
-            "title": "m-000",
-            "name": "m-000.hbs",
-            "file": "src/app/patterns/02-molecules/m-000.hbs",
-            "category": "molecules"
-        },
-        {
             "title": "m-001",
             "name": "m-001.hbs",
             "file": "src/app/patterns/02-molecules/m-001.hbs",
+            "category": "molecules"
+        },
+        {
+            "title": "m-003",
+            "name": "m-003.hbs",
+            "file": "src/app/patterns/02-molecules/m-003.hbs",
             "category": "molecules"
         },
         {
@@ -76,6 +82,12 @@
             "title": "t-001",
             "name": "t-001.hbs",
             "file": "src/app/patterns/04-templates/t-001.hbs",
+            "category": "templates"
+        },
+        {
+            "title": "t-002",
+            "name": "t-002.hbs",
+            "file": "src/app/patterns/04-templates/t-002.hbs",
             "category": "templates"
         },
         {

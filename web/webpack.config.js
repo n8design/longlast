@@ -40,6 +40,7 @@ module.exports = {
             Templates: path.resolve(__dirname, 'src/templates/')
         }
     },
+    devtool: 'inline-source-map',
     module: {
         rules: [{
             test: /\.js$/,

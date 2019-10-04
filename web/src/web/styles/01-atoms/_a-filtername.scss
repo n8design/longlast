@@ -1,4 +1,7 @@
 .a-filtername{
+	font-size: .8em;
+	line-height: 1.4em;
+
 	display: inline-block;
 
 	min-width: 100px;
@@ -7,8 +10,9 @@
 	content: " ";
 	text-align: center;
 
+    color: black;
+    font-weight: bold;
 	border: 2px blacK solid;
 	border-right: none;
-    border-left: none;
-    color: teal;
+	border-left: none;
 }

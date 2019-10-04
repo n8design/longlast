@@ -5,6 +5,9 @@ const Events = require('./stylez.events');
 export class Stylez {
 
     constructor() {
+
+        window.addEventListener('storage', Events.detectStorageChange)
+
         // init internamels
         this.CONSTANTS = _CONSTANTS;
         this.Events = Events;
@@ -33,19 +36,13 @@ export class Stylez {
         }
 
         this.btnPagers = document.querySelectorAll(this.CONSTANTS.pagers);
-        
         this.btnPagers.forEach(pager => {
-            console.log(pager.dataset.filter);
+
             pager.addEventListener('click', Events.changeIndex)
+
         });
 
         SessionStorage.setCurrentFilter();
-
-        window.addEventListener('storage', (event)=>{
-            console.log(event);
-            console.log('Something changed');
-            console.log(SessionStorage.getCurrentFilter());
-        })
 
     }
 

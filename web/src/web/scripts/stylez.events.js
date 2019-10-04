@@ -3,6 +3,13 @@ const SessionStorage = require('./stylez.storage');
 
 class Events {
 
+    static _updateIframeContent() {
+
+        let iframe = document.querySelector(CONSTANTS.viewerFrame);
+        iframe.contentWindow.location.href = "viewer.html"
+
+    }
+
     static _toggleButtons(btnList, curButton) {
 
         btnList.forEach((btn) => {
@@ -19,7 +26,7 @@ class Events {
 
         });
 
-        // updateing Session Status
+        // // updateing Session Status
         SessionStorage.updateStatus();
 
     }
@@ -32,9 +39,7 @@ class Events {
 
         Events._toggleButtons(allButtons, curButton);
 
-        let iframe = document.querySelector(CONSTANTS.viewerFrame);
-        iframe.contentWindow.location.href = "viewer.html"
-
+        Events._updateIframeContent();
     }
 
     // Handle deviceFiltering
@@ -60,7 +65,6 @@ class Events {
             viewerFrame.style.maxWidth = "100vw";
 
         }
-
 
     }
 
@@ -93,23 +97,69 @@ class Events {
 
     }
 
+    /**
+     * Change Index of current element
+     * @param {event} event 
+     */
     static changeIndex(event) {
 
         let curItem = event.target;
+
         if (curItem.dataset !== undefined &&
             curItem.dataset.filter !== undefined) {
 
             let curSession = SessionStorage.getCurrentFilter();
-            
-            console.log(curSession);
 
             if (curItem.dataset.filter === 'next-item') {
-                console.log(curSession.index);
+
+                if (curSession.index + 1 < curSession.maxIndex) {
+
+                    curSession.index = curSession.index + 1;
+
+                } else {
+
+                    curSession.index = 0;
+
+                }
+
+                SessionStorage.updateStatus(curSession);
+                Events._updateIframeContent();
+
             }
 
             if (curItem.dataset.filter === 'prev-item') {
-                console.log(curSession.index);
+
+                if (curSession.index - 1 >= 0) {
+
+                    curSession.index = curSession.index - 1;
+
+                } else {
+
+                    curSession.index = curSession.maxIndex;
+
+                }
+
+                SessionStorage.updateStatus(curSession);
+                Events._updateIframeContent();
+
             }
+
+        }
+
+    }
+
+    /**
+     * Detecht Storage Changes
+     * @param {event} event 
+     */
+    static detectStorageChange(event) {
+
+        let currentSession = SessionStorage.getCurrentFilter();
+
+        if(currentSession.title !== null){
+
+            let currentPatternTitle = document.querySelector('.a-filtername');
+            currentPatternTitle.textContent = currentSession.title;
 
         }
 

@@ -16,6 +16,12 @@ function () {
   }
 
   _createClass(Events, null, [{
+    key: "_updateIframeContent",
+    value: function _updateIframeContent() {
+      var iframe = document.querySelector(CONSTANTS.viewerFrame);
+      iframe.contentWindow.location.href = "viewer.html";
+    }
+  }, {
     key: "_toggleButtons",
     value: function _toggleButtons(btnList, curButton) {
       btnList.forEach(function (btn) {
@@ -24,7 +30,7 @@ function () {
         } else {
           btn.classList.remove('selected');
         }
-      }); // updateing Session Status
+      }); // // updateing Session Status
 
       SessionStorage.updateStatus();
     } // Handle Category selection
@@ -37,8 +43,7 @@ function () {
 
       Events._toggleButtons(allButtons, curButton);
 
-      var iframe = document.querySelector(CONSTANTS.viewerFrame);
-      iframe.contentWindow.location.href = "viewer.html";
+      Events._updateIframeContent();
     } // Handle deviceFiltering
 
   }, {
@@ -84,6 +89,11 @@ function () {
       var tocs = document.querySelector(CONSTANTS.tocs);
       tocs.classList.toggle('active');
     }
+    /**
+     * Change Index of current element
+     * @param {event} event 
+     */
+
   }, {
     key: "changeIndex",
     value: function changeIndex(event) {
@@ -91,15 +101,45 @@ function () {
 
       if (curItem.dataset !== undefined && curItem.dataset.filter !== undefined) {
         var curSession = SessionStorage.getCurrentFilter();
-        console.log(curSession);
 
         if (curItem.dataset.filter === 'next-item') {
-          console.log(curSession.index);
+          if (curSession.index + 1 < curSession.maxIndex) {
+            curSession.index = curSession.index + 1;
+          } else {
+            curSession.index = 0;
+          }
+
+          SessionStorage.updateStatus(curSession);
+
+          Events._updateIframeContent();
         }
 
         if (curItem.dataset.filter === 'prev-item') {
-          console.log(curSession.index);
+          if (curSession.index - 1 >= 0) {
+            curSession.index = curSession.index - 1;
+          } else {
+            curSession.index = curSession.maxIndex;
+          }
+
+          SessionStorage.updateStatus(curSession);
+
+          Events._updateIframeContent();
         }
+      }
+    }
+    /**
+     * Detecht Storage Changes
+     * @param {event} event 
+     */
+
+  }, {
+    key: "detectStorageChange",
+    value: function detectStorageChange(event) {
+      var currentSession = SessionStorage.getCurrentFilter();
+
+      if (currentSession.title !== null) {
+        var currentPatternTitle = document.querySelector('.a-filtername');
+        currentPatternTitle.textContent = currentSession.title;
       }
     }
   }]);
