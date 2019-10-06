@@ -156,11 +156,39 @@ class Events {
 
         let currentSession = SessionStorage.getCurrentFilter();
 
-        if(currentSession.title !== null){
+        console.log('JJJJJJ::::', currentSession, currentSession.title !== null &&
+            currentSession.maxIndex !== null &&
+            currentSession.maxIndex > 0);
+
+        if (currentSession.title !== null &&
+            currentSession.maxIndex !== null &&
+            currentSession.maxIndex > 1) {
 
             let currentPatternTitle = document.querySelector('.a-filtername');
             currentPatternTitle.textContent = currentSession.title;
 
+            let itemSlider = document.querySelector('.m-itemslider');
+            console.log('Item Slider::::', itemSlider);
+
+            if (itemSlider !== null) {
+
+                itemSlider.classList.remove('hidden');
+                itemSlider.classList.add('show');
+
+            }
+
+
+        } else {
+            let itemSlider = document.querySelector('.m-itemslider');
+            console.log('Item Slider::::', itemSlider);
+
+            if (itemSlider !== null) {
+
+
+                itemSlider.classList.add('hidden');
+                itemSlider.classList.remove('show');
+
+            }
         }
 
     }

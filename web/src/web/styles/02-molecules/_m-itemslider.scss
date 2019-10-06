@@ -1,5 +1,76 @@
-.m-itemslider{
+%base-itemslider{
+	display: flex;
+
 	height: 23PX;
-    padding: $base-padding;
-    display: flex;
+	padding: $base-padding;
+}
+
+@mixin timingOnce{
+	animation-duration: .25s;
+	animation-iteration-count: 1;
+
+	animation-fill-mode: forwards;
+}
+
+@keyframes slideHide{
+	0%{
+		overflow: auto;
+
+		max-width: 100%;
+		padding: $base-padding;
+	}
+
+	75%{
+		padding-right: 0;
+		padding-left: 0;
+	}
+
+	100%{
+		overflow: hidden;
+
+		max-width: 0;
+		padding-right: 0;
+		padding-left: 0;
+	}
+}
+
+@keyframes slideShow{
+	0%{
+		overflow: hidden;
+
+		max-width: 0;
+		padding-right: 0;
+		padding-left: 0;
+	}
+
+	25%{
+		padding: $base-padding;
+	}
+
+	100%{
+		overflow: auto;
+
+		max-width: 100%;
+        padding: $base-padding;
+	}
+}
+
+.m-itemslider{
+	@extend %base-itemslider;
+
+	&.hidden{
+		@extend %base-itemslider;
+		@include timingOnce();
+
+		animation-name: slideHide;
+		animation-timing-function: linear;
+	}
+
+	&.show{
+		@extend %base-itemslider;
+		@include timingOnce();
+
+		animation-name: slideShow;
+		animation-timing-function: linear;
+	}
 }

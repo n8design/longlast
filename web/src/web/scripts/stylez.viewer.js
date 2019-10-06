@@ -63,10 +63,10 @@ pattern.then(data => {
         return item.category === curSession.category;
     });
 
+    let currentFilter = SessionStorage.getCurrentFilter();
+
     if (curSession.category === 'pages' ||
         curSession.category === 'templates') {
-
-        let currentFilter = SessionStorage.getCurrentFilter();
 
         if (currentPatterns.length !== 0) {
 
@@ -93,6 +93,14 @@ pattern.then(data => {
             SessionStorage.updateStatus(currentFilter);
 
         }
+
+    } else {
+
+        currentFilter.maxIndex = null;
+        currentFilter.index = null;
+        currentFilter.title = null;
+
+        SessionStorage.updateStatus(currentFilter);    
 
     }
 

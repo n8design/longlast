@@ -82,7 +82,6 @@ class SessionStorage {
 
         } else {
 
-
             sessionStorage.setItem(STORAGE, JSON.stringify(updates));
 
         }
@@ -113,15 +112,23 @@ class SessionStorage {
         }
 
         let currentPatternTitle = document.querySelector('.a-filtername');
-        debugger;
 
         if (curStatus.title !== null) {
 
             currentPatternTitle.textContent = curStatus.title;
 
         } else {
-            console.log('Helloooo')
-            currentPatternTitle.textContent = 'abc';
+
+            currentPatternTitle.textContent = ' ';
+            let itemSlider = document.querySelector('.m-itemslider');
+
+            if (itemSlider !== null) {
+
+                if (curStatus.maxIndex !== null) {
+                    itemSlider.classList.add('show');
+                }
+
+            }
 
         }
 

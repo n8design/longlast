@@ -75,10 +75,9 @@ pattern.then(function (data) {
   var currentPatterns = patterns.filter(function (item) {
     return item.category === curSession.category;
   });
+  var currentFilter = SessionStorage.getCurrentFilter();
 
   if (curSession.category === 'pages' || curSession.category === 'templates') {
-    var currentFilter = SessionStorage.getCurrentFilter();
-
     if (currentPatterns.length !== 0) {
       var curIndex = currentFilter.index ? currentFilter.index : 0;
       currentFilter.maxIndex = currentPatterns.length - 1;
@@ -94,6 +93,11 @@ pattern.then(function (data) {
       currentFilter.title = null;
       SessionStorage.updateStatus(currentFilter);
     }
+  } else {
+    currentFilter.maxIndex = null;
+    currentFilter.index = null;
+    currentFilter.title = null;
+    SessionStorage.updateStatus(currentFilter);
   }
 
   if (currentPatterns.length !== 0) {

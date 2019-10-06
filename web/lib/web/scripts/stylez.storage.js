@@ -97,13 +97,18 @@ function () {
       }
 
       var currentPatternTitle = document.querySelector('.a-filtername');
-      debugger;
 
       if (curStatus.title !== null) {
         currentPatternTitle.textContent = curStatus.title;
       } else {
-        console.log('Helloooo');
-        currentPatternTitle.textContent = 'abc';
+        currentPatternTitle.textContent = ' ';
+        var itemSlider = document.querySelector('.m-itemslider');
+
+        if (itemSlider !== null) {
+          if (curStatus.maxIndex !== null) {
+            itemSlider.classList.add('show');
+          }
+        }
       }
     }
   }, {

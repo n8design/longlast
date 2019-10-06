@@ -136,10 +136,28 @@ function () {
     key: "detectStorageChange",
     value: function detectStorageChange(event) {
       var currentSession = SessionStorage.getCurrentFilter();
+      console.log('JJJJJJ::::', currentSession, currentSession.title !== null && currentSession.maxIndex !== null && currentSession.maxIndex > 0);
 
-      if (currentSession.title !== null) {
+      if (currentSession.title !== null && currentSession.maxIndex !== null && currentSession.maxIndex > 1) {
         var currentPatternTitle = document.querySelector('.a-filtername');
         currentPatternTitle.textContent = currentSession.title;
+        var itemSlider = document.querySelector('.m-itemslider');
+        console.log('Item Slider::::', itemSlider);
+
+        if (itemSlider !== null) {
+          itemSlider.classList.remove('hidden');
+          itemSlider.classList.add('show');
+        }
+      } else {
+        var _itemSlider = document.querySelector('.m-itemslider');
+
+        console.log('Item Slider::::', _itemSlider);
+
+        if (_itemSlider !== null) {
+          _itemSlider.classList.add('hidden');
+
+          _itemSlider.classList.remove('show');
+        }
       }
     }
   }]);
