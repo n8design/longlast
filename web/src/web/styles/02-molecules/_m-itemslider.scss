@@ -56,7 +56,8 @@
 }
 
 .m-itemslider{
-	@extend %base-itemslider;
+    @extend %base-itemslider;
+    flex-shrink: 0;
 
 	&.hidden{
 		@extend %base-itemslider;

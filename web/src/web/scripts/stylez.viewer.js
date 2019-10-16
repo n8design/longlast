@@ -22,24 +22,11 @@ const cpyToClipboard = (event) => {
     let curElement = event.target.parentElement.parentElement,
         curContent = curElement.querySelector('.viewer-content');
 
-    console.log(
-        curElement.parentElement,
-        curContent
-    );
-
-    navigator.permissions.query({
-
-        name: "clipboard-write"
-
-    }).then(result => {
-
-        if (result.state == "granted" || result.state == "prompt") {
-
-            navigator.clipboard.writeText(curContent.innerHTML);
-
-        }
-
-    });
+    try {
+        navigator.clipboard.writeText(curContent.innerHTML);
+    } catch (error) {
+        console.log(error);
+    }
 
 }
 
@@ -63,7 +50,7 @@ const fetchPattern = async () => {
         })
         .catch(error => {
 
-            console.error('ERROR:::::', error);
+            console.error('ERROR :::', error);
 
         })
 
@@ -134,6 +121,8 @@ pattern.then(data => {
 
         const patternsContainer = document.querySelector('.patterns');
 
+        const copyCpl = navigator && navigator.clipboard ? "<div title='copy' class='viewer-filename copy'>copy</div>" : "";
+
         currentPatterns.forEach(pattern => {
 
             let curTemplate = stylez.templates[pattern.title];
@@ -154,7 +143,7 @@ pattern.then(data => {
                 const content = `<div data-category='${pattern.category}' class='viewer-pattern'>
             <div class='viewer-header'>
                 <div title='${ pattern.title }' class='viewer-title'>${ pattern.title }</div>
-                <div title='copy' class='viewer-filename copy'>copy</div>
+                ${ copyCpl }
                 <div title='${pattern.file }' class='viewer-filename'>${pattern.file.split('/').pop()}</div>
             </div>
             <div class='viewer-content'>
@@ -170,6 +159,8 @@ pattern.then(data => {
         })
 
         var copyElements = document.querySelectorAll('.copy');
+
+        console.log('Navigator Clipboard', navigator.clipboard);
 
         copyElements.forEach(item => {
 
