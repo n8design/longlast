@@ -23,6 +23,19 @@ var evalHTML = function evalHTML(partialHTML) {
   }
 };
 
+var cpyToClipboard = function cpyToClipboard(event) {
+  var curElement = event.target.parentElement.parentElement,
+      curContent = curElement.querySelector('.viewer-content');
+  console.log(curElement.parentElement, curContent);
+  navigator.permissions.query({
+    name: "clipboard-write"
+  }).then(function (result) {
+    if (result.state == "granted" || result.state == "prompt") {
+      navigator.clipboard.writeText(curContent.innerHTML);
+    }
+  });
+};
+
 var fetchPattern =
 /*#__PURE__*/
 function () {
@@ -115,9 +128,13 @@ pattern.then(function (data) {
 
       if (curTemplate !== undefined && templateContent !== 'undefined') {
         var evaledContent = evalHTML(templateContent);
-        var content = "<div data-category='".concat(pattern.category, "' class='viewer-pattern'>\n            <div class='viewer-header'>\n                <div title='").concat(pattern.title, "' class='viewer-title'>").concat(pattern.title, "</div>\n                <div title='").concat(pattern.file, "' class='viewer-filename'>").concat(pattern.file.split('/').pop(), "</div>\n            </div>\n            <div class='viewer-content'>\n            ").concat(evaledContent, "\n            </div>\n            <pre class='viewer-code'>").concat(evaledContent.replace(/</g, '&lt;').replace(/>/g, '&gt;'), "</pre>\n            </div>");
+        var content = "<div data-category='".concat(pattern.category, "' class='viewer-pattern'>\n            <div class='viewer-header'>\n                <div title='").concat(pattern.title, "' class='viewer-title'>").concat(pattern.title, "</div>\n                <div title='copy' class='viewer-filename copy'>copy</div>\n                <div title='").concat(pattern.file, "' class='viewer-filename'>").concat(pattern.file.split('/').pop(), "</div>\n            </div>\n            <div class='viewer-content'>\n            ").concat(evaledContent, "\n            </div>\n            <pre class='viewer-code'>").concat(evaledContent.replace(/</g, '&lt;').replace(/>/g, '&gt;'), "</pre>\n            </div>");
         patternsContainer.insertAdjacentHTML('beforeend', content);
       }
+    });
+    var copyElements = document.querySelectorAll('.copy');
+    copyElements.forEach(function (item) {
+      item.addEventListener('click', cpyToClipboard);
     });
   }
 });

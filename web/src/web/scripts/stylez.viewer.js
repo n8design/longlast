@@ -17,6 +17,32 @@ const evalHTML = (partialHTML) => {
 
 }
 
+const cpyToClipboard = (event) => {
+
+    let curElement = event.target.parentElement.parentElement,
+        curContent = curElement.querySelector('.viewer-content');
+
+    console.log(
+        curElement.parentElement,
+        curContent
+    );
+
+    navigator.permissions.query({
+
+        name: "clipboard-write"
+
+    }).then(result => {
+
+        if (result.state == "granted" || result.state == "prompt") {
+
+            navigator.clipboard.writeText(curContent.innerHTML);
+
+        }
+
+    });
+
+}
+
 const fetchPattern = async () => {
 
     let url = './app/config/stylez.json';
@@ -100,7 +126,7 @@ pattern.then(data => {
         currentFilter.index = null;
         currentFilter.title = null;
 
-        SessionStorage.updateStatus(currentFilter);    
+        SessionStorage.updateStatus(currentFilter);
 
     }
 
@@ -128,6 +154,7 @@ pattern.then(data => {
                 const content = `<div data-category='${pattern.category}' class='viewer-pattern'>
             <div class='viewer-header'>
                 <div title='${ pattern.title }' class='viewer-title'>${ pattern.title }</div>
+                <div title='copy' class='viewer-filename copy'>copy</div>
                 <div title='${pattern.file }' class='viewer-filename'>${pattern.file.split('/').pop()}</div>
             </div>
             <div class='viewer-content'>
@@ -141,6 +168,14 @@ pattern.then(data => {
             }
 
         })
+
+        var copyElements = document.querySelectorAll('.copy');
+
+        copyElements.forEach(item => {
+
+            item.addEventListener('click', cpyToClipboard);
+
+        });
     }
 
 })
