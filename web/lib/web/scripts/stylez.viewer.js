@@ -69,7 +69,8 @@ function () {
   };
 }();
 
-var pattern = fetchPattern();
+var pattern = fetchPattern(); // let pattern = StylezData.Pattern();
+
 pattern.then(function (data) {
   var patterns = data.patterns.sort(function (a, b) {
     if (a.file < b.file) {
@@ -88,7 +89,7 @@ pattern.then(function (data) {
   });
   var currentFilter = SessionStorage.getCurrentFilter();
 
-  if (curSession.category === 'pages' || curSession.category === 'templates') {
+  if (curSession.category === 'pages' || curSession.category === 'templates' || currentFilter.index !== null) {
     if (currentPatterns.length !== 0) {
       var curIndex = currentFilter.index ? currentFilter.index : 0;
       currentFilter.maxIndex = currentPatterns.length - 1;

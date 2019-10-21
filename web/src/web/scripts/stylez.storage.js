@@ -1,5 +1,4 @@
 const _CONSTANTS = require('./stylez.constants');
-
 const STORAGE = 'stylez';
 
 class SessionStorage {

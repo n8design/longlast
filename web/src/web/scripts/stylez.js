@@ -1,6 +1,7 @@
 const _CONSTANTS = require('./stylez.constants');
 const SessionStorage = require('./stylez.storage');
 const Events = require('./stylez.events');
+// const Data = require('./styles.data');
 
 export class Stylez {
 
@@ -43,6 +44,87 @@ export class Stylez {
         });
 
         SessionStorage.setCurrentFilter();
+
+        this.renderToc();
+
+    }
+
+    async _fetchPattern() {
+
+        let url = './app/config/stylez.json';
+
+        return await fetch(url)
+            .then((response) => {
+
+                if (response.status === 200) {
+
+                    return response.json();
+
+                } else {
+
+                    throw "Error current status: " + response.status + " - " + url;
+
+                }
+
+            })
+            .catch(error => {
+
+                console.error('ERROR :::', error);
+
+            })
+
+    }
+
+
+    renderToc() {
+
+        const toc = document.querySelector('.o-tocsinner');
+
+        let pattern = this._fetchPattern();
+
+        let patternString = {};
+
+        pattern.then((data) => {
+
+            console.log(data);
+
+            data.patterns.sort((a, b) => {
+                if (a.file < b.file) {
+                    return -1;
+                }
+                if (a.file > b.file) {
+                    return 1;
+                }
+                return 0;
+            })
+
+            data.patterns.forEach(item => {
+
+                if (patternString[item.category] === undefined) {
+                    patternString[item.category] = "";
+                }
+
+                patternString[item.category] += `<li><button data-filter='${item.title}' class='a-toc-toggle'>${item.title}</button></li>`;
+
+            });
+
+            console.log('Patternstring::::', patternString);
+
+            let tocOutput =
+                `<ul><li><h2>Atoms</h2><ol>${patternString['atoms'] }</ol></li></ul>
+            <ul><li><h2>Molecules</h2><ol>${patternString['molecules'] }</ol></li></ul>
+            <ul><li><h2>Organism</h2><ol>${patternString['organism'] }</ol></li></ul>
+            <ul><li><h2>Templates</h2><ol>${patternString['templates'] }</ol></li></ul>
+            <ul><li><h2>Pages</h2><ol>${patternString['pages'] }</ol></li></ul>`;
+
+
+            console.log(tocOutput);
+
+            toc.innerHTML = tocOutput;
+
+        });
+
+
 
     }
 

@@ -1,25 +1,60 @@
 .o-tocs{
+	position: absolute;
+	z-index: 10;
+
 	overflow: hidden;
 
 	box-sizing: border-box;
+	width: 100%;
 	max-height: 0;
 
 	transition: max-height .25s ease-in-out 0,
 	border-bottom 5s ease-in-out .125s;
 
-	&inner{
-		margin: 1em;
-	}
+	background-color: white;
 
 	&.active{
 		overflow: unset;
 
 		height: auto;
+		min-height: 50vh;
 		max-height: 100vh;
 
 		transition: max-height .25s ease-in-out 0,
 		border-bottom 5s ease-in-out .125s;
 
 		border-bottom: 1px $c-black solid;
+	}
+}
+.o-tocsinner{
+	display: flex;
+	flex-direction: row;
+
+	margin: 1em;
+
+	flex-wrap: wrap;
+	h2{
+		display: block;
+
+		margin-top: 0;
+	}
+	ul{
+		margin: 0;
+		padding: 0;
+		padding-bottom: 1em;
+
+		list-style: none;
+
+		flex-basis: 100%;
+		ol{
+			padding-left: 1rem;
+
+			list-style: none;
+
+			columns: 2;
+			li{
+				padding: 0;
+			}
+		}
 	}
 }

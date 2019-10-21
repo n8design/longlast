@@ -57,6 +57,7 @@ const fetchPattern = async () => {
 }
 
 let pattern = fetchPattern();
+// let pattern = StylezData.Pattern();
 
 pattern.then(data => {
 
@@ -79,7 +80,7 @@ pattern.then(data => {
     let currentFilter = SessionStorage.getCurrentFilter();
 
     if (curSession.category === 'pages' ||
-        curSession.category === 'templates') {
+        curSession.category === 'templates' || currentFilter.index !== null) {
 
         if (currentPatterns.length !== 0) {
 

@@ -1,42 +1,139 @@
+import "core-js/modules/es6.promise";
+import "core-js/modules/es6.object.to-string";
+import "core-js/modules/es6.array.sort";
+import "regenerator-runtime/runtime";
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 var _CONSTANTS = require('./stylez.constants');
 
 var SessionStorage = require('./stylez.storage');
 
-var Events = require('./stylez.events');
+var Events = require('./stylez.events'); // const Data = require('./styles.data');
 
-export var Stylez = function Stylez() {
-  _classCallCheck(this, Stylez);
 
-  window.addEventListener('storage', Events.detectStorageChange); // init internamels
+export var Stylez =
+/*#__PURE__*/
+function () {
+  function Stylez() {
+    _classCallCheck(this, Stylez);
 
-  this.CONSTANTS = _CONSTANTS;
-  this.Events = Events; // register category filters
+    window.addEventListener('storage', Events.detectStorageChange); // init internamels
 
-  this.btnsCatFilter = document.querySelectorAll(this.CONSTANTS.dmAtomicFilter);
-  this.btnsCatFilter.forEach(function (btn) {
-    btn.addEventListener('click', Events.filterCategories);
-  }); // register device types
+    this.CONSTANTS = _CONSTANTS;
+    this.Events = Events; // register category filters
 
-  this.btnDeviceSelector = document.querySelectorAll(this.CONSTANTS.dmDeviceTypes);
-  this.btnDeviceSelector.forEach(function (btn) {
-    btn.addEventListener('click', Events.filterDeviceType);
-  });
-  window.addEventListener('resize', Events.setWidth); // set the initial width
+    this.btnsCatFilter = document.querySelectorAll(this.CONSTANTS.dmAtomicFilter);
+    this.btnsCatFilter.forEach(function (btn) {
+      btn.addEventListener('click', Events.filterCategories);
+    }); // register device types
 
-  Events.setWidth(null);
-  this.btnTocs = document.querySelector(this.CONSTANTS.dmFilterTocs);
+    this.btnDeviceSelector = document.querySelectorAll(this.CONSTANTS.dmDeviceTypes);
+    this.btnDeviceSelector.forEach(function (btn) {
+      btn.addEventListener('click', Events.filterDeviceType);
+    });
+    window.addEventListener('resize', Events.setWidth); // set the initial width
 
-  if (this.btnTocs !== null && this.btnTocs !== null) {
-    this.btnTocs.addEventListener('click', Events.toggleTocs);
+    Events.setWidth(null);
+    this.btnTocs = document.querySelector(this.CONSTANTS.dmFilterTocs);
+
+    if (this.btnTocs !== null && this.btnTocs !== null) {
+      this.btnTocs.addEventListener('click', Events.toggleTocs);
+    }
+
+    this.btnPagers = document.querySelectorAll(this.CONSTANTS.pagers);
+    this.btnPagers.forEach(function (pager) {
+      pager.addEventListener('click', Events.changeIndex);
+    });
+    SessionStorage.setCurrentFilter();
+    this.renderToc();
   }
 
-  this.btnPagers = document.querySelectorAll(this.CONSTANTS.pagers);
-  this.btnPagers.forEach(function (pager) {
-    pager.addEventListener('click', Events.changeIndex);
-  });
-  SessionStorage.setCurrentFilter();
-};
+  _createClass(Stylez, [{
+    key: "_fetchPattern",
+    value: function () {
+      var _fetchPattern2 = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee() {
+        var url;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                url = './app/config/stylez.json';
+                _context.next = 3;
+                return fetch(url).then(function (response) {
+                  if (response.status === 200) {
+                    return response.json();
+                  } else {
+                    throw "Error current status: " + response.status + " - " + url;
+                  }
+                }).catch(function (error) {
+                  console.error('ERROR :::', error);
+                });
+
+              case 3:
+                return _context.abrupt("return", _context.sent);
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      function _fetchPattern() {
+        return _fetchPattern2.apply(this, arguments);
+      }
+
+      return _fetchPattern;
+    }()
+  }, {
+    key: "renderToc",
+    value: function renderToc() {
+      var toc = document.querySelector('.o-tocsinner');
+
+      var pattern = this._fetchPattern();
+
+      var patternString = {};
+      pattern.then(function (data) {
+        console.log(data);
+        data.patterns.sort(function (a, b) {
+          if (a.file < b.file) {
+            return -1;
+          }
+
+          if (a.file > b.file) {
+            return 1;
+          }
+
+          return 0;
+        });
+        data.patterns.forEach(function (item) {
+          if (patternString[item.category] === undefined) {
+            patternString[item.category] = "";
+          }
+
+          patternString[item.category] += "<li><button data-filter='".concat(item.title, "' class='a-toc-toggle'>").concat(item.title, "</button></li>");
+        });
+        console.log('Patternstring::::', patternString);
+        var tocOutput = "<ul><li><h2>Atoms</h2><ol>".concat(patternString['atoms'], "</ol></li></ul>\n            <ul><li><h2>Molecules</h2><ol>").concat(patternString['molecules'], "</ol></li></ul>\n            <ul><li><h2>Organism</h2><ol>").concat(patternString['organism'], "</ol></li></ul>\n            <ul><li><h2>Templates</h2><ol>").concat(patternString['templates'], "</ol></li></ul>\n            <ul><li><h2>Pages</h2><ol>").concat(patternString['pages'], "</ol></li></ul>");
+        console.log(tocOutput);
+        toc.innerHTML = tocOutput;
+      });
+    }
+  }]);
+
+  return Stylez;
+}();
 var ui = new Stylez();
 //# sourceMappingURL=stylez.js.map
