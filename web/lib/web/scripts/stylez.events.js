@@ -89,6 +89,29 @@ function () {
       var tocs = document.querySelector(CONSTANTS.tocs);
       tocs.classList.toggle('active');
     }
+  }, {
+    key: "setTocFilter",
+    value: function setTocFilter(event) {
+      event.preventDefault();
+      var curButton = event.target,
+          curIndex = curButton.dataset.index,
+          curFilter = curButton.dataset.filter;
+      var curSession = SessionStorage.getCurrentFilter();
+      curSession.category = curFilter;
+      curSession.index = parseInt(curIndex);
+      curSession.maxIndex = document.querySelectorAll("button.a-toc-toggle[data-filter='".concat(curFilter, "']")).length;
+      SessionStorage.updateStatus(curSession);
+      document.querySelector('.o-tocs').classList.remove('active');
+      var activeButton = document.querySelector("button.a-filter[data-filter='".concat(curFilter, "']"));
+      var allButtons = document.querySelectorAll("button.a-filter");
+
+      Events._toggleButtons(allButtons, activeButton); // force the Storage Change to show slider if required
+
+
+      Events.detectStorageChange(null);
+
+      Events._updateIframeContent();
+    }
     /**
      * Change Index of current element
      * @param {event} event 

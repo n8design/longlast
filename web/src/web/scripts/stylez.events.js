@@ -97,6 +97,32 @@ class Events {
 
     }
 
+    static setTocFilter(event) {
+        event.preventDefault();
+        let curButton = event.target,
+            curIndex = curButton.dataset.index,
+            curFilter = curButton.dataset.filter;
+
+        let curSession = SessionStorage.getCurrentFilter();
+        curSession.category = curFilter;
+        curSession.index = parseInt(curIndex);
+        curSession.maxIndex = document.querySelectorAll(`button.a-toc-toggle[data-filter='${curFilter}']`).length;
+
+        SessionStorage.updateStatus(curSession);
+
+        document.querySelector('.o-tocs').classList.remove('active');
+        
+        let activeButton = document.querySelector(`button.a-filter[data-filter='${curFilter}']`);
+        let allButtons = document.querySelectorAll(`button.a-filter`);
+
+        Events._toggleButtons(allButtons, activeButton);
+
+        // force the Storage Change to show slider if required
+        Events.detectStorageChange(null);
+        Events._updateIframeContent();
+
+    }
+
     /**
      * Change Index of current element
      * @param {event} event 

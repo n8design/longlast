@@ -45,6 +45,9 @@ export class Stylez {
 
         SessionStorage.setCurrentFilter();
 
+        // force slider to show or not
+        Events.detectStorageChange(null);
+
         this.renderToc();
 
     }
@@ -86,17 +89,34 @@ export class Stylez {
 
         pattern.then((data) => {
 
-            console.log(data);
+            let patternItems = data.patterns;
 
-            data.patterns.sort((a, b) => {
-                if (a.file < b.file) {
-                    return -1;
-                }
-                if (a.file > b.file) {
-                    return 1;
-                }
-                return 0;
+
+
+            // data.patterns.sort((a, b) => {
+            //     if (a.file < b.file) {
+            //         return -1;
+            //     }
+            //     if (a.file > b.file) {
+            //         return 1;
+            //     }
+            //     return 0;
+            // })
+
+            // create unique values first
+            let categories = [...new Set(patternItems.map(item => item.category))];
+            // create statistics object
+            let categoryStats = new Object();
+            categories.forEach(item => {
+                // create properties
+                categoryStats[item] = 0;
             })
+
+            console.log(categories, categoryStats);
+
+            let cateogryStat = {
+
+            }
 
             data.patterns.forEach(item => {
 
@@ -104,11 +124,18 @@ export class Stylez {
                     patternString[item.category] = "";
                 }
 
-                patternString[item.category] += `<li><button data-filter='${item.title}' class='a-toc-toggle'>${item.title}</button></li>`;
+                categoryStats[item.category] += 1;
+
+                patternString[item.category] += `<li><button 
+                data-filter='${item.category}' 
+                data-index='${categoryStats[item.category]}' 
+                class='a-toc-toggle'>${item.title}</button></li>`;
 
             });
 
-            console.log('Patternstring::::', patternString);
+            console.log(categoryStats);
+
+            // console.log('Patternstring::::', patternString);
 
             let tocOutput =
                 `<ul><li><h2>Atoms</h2><ol>${patternString['atoms'] }</ol></li></ul>
@@ -118,9 +145,16 @@ export class Stylez {
             <ul><li><h2>Pages</h2><ol>${patternString['pages'] }</ol></li></ul>`;
 
 
-            console.log(tocOutput);
+            console.log(tocOutput, this.Events);
 
             toc.innerHTML = tocOutput;
+
+            document.querySelectorAll('.a-toc-toggle').forEach(item => {
+                item.addEventListener('click', this.Events.setTocFilter);
+            })
+
+            // Apply filter
+
 
         });
 

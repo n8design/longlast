@@ -1,7 +1,22 @@
+import "core-js/modules/es6.array.from";
+import "core-js/modules/es6.regexp.to-string";
+import "core-js/modules/es7.symbol.async-iterator";
+import "core-js/modules/es6.symbol";
 import "core-js/modules/es6.promise";
+import "core-js/modules/web.dom.iterable";
+import "core-js/modules/es6.array.iterator";
 import "core-js/modules/es6.object.to-string";
-import "core-js/modules/es6.array.sort";
+import "core-js/modules/es6.string.iterator";
+import "core-js/modules/es6.set";
 import "regenerator-runtime/runtime";
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -53,7 +68,9 @@ function () {
     this.btnPagers.forEach(function (pager) {
       pager.addEventListener('click', Events.changeIndex);
     });
-    SessionStorage.setCurrentFilter();
+    SessionStorage.setCurrentFilter(); // force slider to show or not
+
+    Events.detectStorageChange(null);
     this.renderToc();
   }
 
@@ -100,35 +117,53 @@ function () {
   }, {
     key: "renderToc",
     value: function renderToc() {
+      var _this = this;
+
       var toc = document.querySelector('.o-tocsinner');
 
       var pattern = this._fetchPattern();
 
       var patternString = {};
       pattern.then(function (data) {
-        console.log(data);
-        data.patterns.sort(function (a, b) {
-          if (a.file < b.file) {
-            return -1;
-          }
+        var patternItems = data.patterns; // data.patterns.sort((a, b) => {
+        //     if (a.file < b.file) {
+        //         return -1;
+        //     }
+        //     if (a.file > b.file) {
+        //         return 1;
+        //     }
+        //     return 0;
+        // })
+        // create unique values first
 
-          if (a.file > b.file) {
-            return 1;
-          }
+        var categories = _toConsumableArray(new Set(patternItems.map(function (item) {
+          return item.category;
+        }))); // create statistics object
 
-          return 0;
+
+        var categoryStats = new Object();
+        categories.forEach(function (item) {
+          // create properties
+          categoryStats[item] = 0;
         });
+        console.log(categories, categoryStats);
+        var cateogryStat = {};
         data.patterns.forEach(function (item) {
           if (patternString[item.category] === undefined) {
             patternString[item.category] = "";
           }
 
-          patternString[item.category] += "<li><button data-filter='".concat(item.title, "' class='a-toc-toggle'>").concat(item.title, "</button></li>");
+          categoryStats[item.category] += 1;
+          patternString[item.category] += "<li><button \n                data-filter='".concat(item.category, "' \n                data-index='").concat(categoryStats[item.category], "' \n                class='a-toc-toggle'>").concat(item.title, "</button></li>");
         });
-        console.log('Patternstring::::', patternString);
+        console.log(categoryStats); // console.log('Patternstring::::', patternString);
+
         var tocOutput = "<ul><li><h2>Atoms</h2><ol>".concat(patternString['atoms'], "</ol></li></ul>\n            <ul><li><h2>Molecules</h2><ol>").concat(patternString['molecules'], "</ol></li></ul>\n            <ul><li><h2>Organism</h2><ol>").concat(patternString['organism'], "</ol></li></ul>\n            <ul><li><h2>Templates</h2><ol>").concat(patternString['templates'], "</ol></li></ul>\n            <ul><li><h2>Pages</h2><ol>").concat(patternString['pages'], "</ol></li></ul>");
-        console.log(tocOutput);
+        console.log(tocOutput, _this.Events);
         toc.innerHTML = tocOutput;
+        document.querySelectorAll('.a-toc-toggle').forEach(function (item) {
+          item.addEventListener('click', _this.Events.setTocFilter);
+        }); // Apply filter
       });
     }
   }]);
