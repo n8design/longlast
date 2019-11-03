@@ -112,8 +112,6 @@ export class Stylez {
                 categoryStats[item] = 0;
             })
 
-            console.log(categories, categoryStats);
-
             let cateogryStat = {
 
             }
@@ -124,18 +122,14 @@ export class Stylez {
                     patternString[item.category] = "";
                 }
 
-                categoryStats[item.category] += 1;
-
                 patternString[item.category] += `<li><button 
                 data-filter='${item.category}' 
                 data-index='${categoryStats[item.category]}' 
                 class='a-toc-toggle'>${item.title}</button></li>`;
 
+                categoryStats[item.category] += 1;
+
             });
-
-            console.log(categoryStats);
-
-            // console.log('Patternstring::::', patternString);
 
             let tocOutput =
                 `<ul><li><h2>Atoms</h2><ol>${patternString['atoms'] }</ol></li></ul>
@@ -143,9 +137,6 @@ export class Stylez {
             <ul><li><h2>Organism</h2><ol>${patternString['organism'] }</ol></li></ul>
             <ul><li><h2>Templates</h2><ol>${patternString['templates'] }</ol></li></ul>
             <ul><li><h2>Pages</h2><ol>${patternString['pages'] }</ol></li></ul>`;
-
-
-            console.log(tocOutput, this.Events);
 
             toc.innerHTML = tocOutput;
 

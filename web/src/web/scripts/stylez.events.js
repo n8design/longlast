@@ -26,7 +26,7 @@ class Events {
 
         });
 
-        // // updateing Session Status
+        // updateing Session Status
         SessionStorage.updateStatus();
 
     }
@@ -182,10 +182,6 @@ class Events {
 
         let currentSession = SessionStorage.getCurrentFilter();
 
-        console.log('JJJJJJ::::', currentSession, currentSession.title !== null &&
-            currentSession.maxIndex !== null &&
-            currentSession.maxIndex > 0);
-
         if (currentSession.title !== null &&
             currentSession.maxIndex !== null &&
             currentSession.maxIndex > 1) {
@@ -194,7 +190,6 @@ class Events {
             currentPatternTitle.textContent = currentSession.title;
 
             let itemSlider = document.querySelector('.m-itemslider');
-            console.log('Item Slider::::', itemSlider);
 
             if (itemSlider !== null) {
 
@@ -205,11 +200,10 @@ class Events {
 
 
         } else {
+
             let itemSlider = document.querySelector('.m-itemslider');
-            console.log('Item Slider::::', itemSlider);
 
             if (itemSlider !== null) {
-
 
                 itemSlider.classList.add('hidden');
                 itemSlider.classList.remove('show');

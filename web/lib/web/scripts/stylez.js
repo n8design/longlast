@@ -146,20 +146,16 @@ function () {
           // create properties
           categoryStats[item] = 0;
         });
-        console.log(categories, categoryStats);
         var cateogryStat = {};
         data.patterns.forEach(function (item) {
           if (patternString[item.category] === undefined) {
             patternString[item.category] = "";
           }
 
-          categoryStats[item.category] += 1;
           patternString[item.category] += "<li><button \n                data-filter='".concat(item.category, "' \n                data-index='").concat(categoryStats[item.category], "' \n                class='a-toc-toggle'>").concat(item.title, "</button></li>");
+          categoryStats[item.category] += 1;
         });
-        console.log(categoryStats); // console.log('Patternstring::::', patternString);
-
         var tocOutput = "<ul><li><h2>Atoms</h2><ol>".concat(patternString['atoms'], "</ol></li></ul>\n            <ul><li><h2>Molecules</h2><ol>").concat(patternString['molecules'], "</ol></li></ul>\n            <ul><li><h2>Organism</h2><ol>").concat(patternString['organism'], "</ol></li></ul>\n            <ul><li><h2>Templates</h2><ol>").concat(patternString['templates'], "</ol></li></ul>\n            <ul><li><h2>Pages</h2><ol>").concat(patternString['pages'], "</ol></li></ul>");
-        console.log(tocOutput, _this.Events);
         toc.innerHTML = tocOutput;
         document.querySelectorAll('.a-toc-toggle').forEach(function (item) {
           item.addEventListener('click', _this.Events.setTocFilter);

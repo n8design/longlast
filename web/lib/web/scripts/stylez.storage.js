@@ -52,7 +52,11 @@ function () {
   }, {
     key: "updateStatus",
     value: function updateStatus(updates) {
+      console.log('Updates :::', updates);
+
       if (updates === undefined) {
+        console.log('Updates ::: -', 'updates are undefine');
+
         var defaultSession = this._returnDefault();
 
         var stylezSession = sessionStorage.getItem(STORAGE);
@@ -66,7 +70,7 @@ function () {
         } else {
           var newStatus = JSON.parse(stylezSession);
           newStatus.category = this._getSelectedCategory();
-          newStatus.deviceSize = this._getSelectedDeviceSize();
+          newStatus.deviceSize = this._getSelectedDeviceSize(); // newStatus.index = null;
 
           this._getSelectedCategory();
 

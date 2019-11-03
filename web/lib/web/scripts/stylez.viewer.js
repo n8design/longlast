@@ -30,7 +30,7 @@ var cpyToClipboard = function cpyToClipboard(event) {
   try {
     navigator.clipboard.writeText(curContent.innerHTML);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -133,7 +133,6 @@ pattern.then(function (data) {
       }
     });
     var copyElements = document.querySelectorAll('.copy');
-    console.log('Navigator Clipboard', navigator.clipboard);
     copyElements.forEach(function (item) {
       item.addEventListener('click', cpyToClipboard);
     });
