@@ -129,7 +129,7 @@ const html = () => {
         .pipe(dest('.tmp/web'));
 }
 
-configGenerator.statupCheck();
+configGenerator.startupCheck();
 
 exports.serve = series(html, styles, scripts, compileTemplates, serve);
 exports.default = serve;

@@ -1,18 +1,6 @@
 {
     "patterns": [
         {
-            "title": "a-007",
-            "name": "a-007.hbs",
-            "file": "src/app/patterns/01-atoms/a-007.hbs",
-            "category": "atoms"
-        },
-        {
-            "title": "m-000",
-            "name": "m-000.hbs",
-            "file": "src/app/patterns/02-molecules/m-000.hbs",
-            "category": "molecules"
-        },
-        {
             "title": "a-000",
             "name": "a-000.hbs",
             "file": "src/app/patterns/01-atoms/a-000.hbs",
@@ -43,16 +31,76 @@
             "category": "atoms"
         },
         {
+            "title": "a-005",
+            "name": "a-005.hbs",
+            "file": "src/app/patterns/01-atoms/a-005.hbs",
+            "category": "atoms"
+        },
+        {
             "title": "a-006",
             "name": "a-006.hbs",
             "file": "src/app/patterns/01-atoms/a-006.hbs",
             "category": "atoms"
         },
         {
-            "title": "a-005",
-            "name": "a-005.hbs",
-            "file": "src/app/patterns/01-atoms/a-005.hbs",
+            "title": "a-007",
+            "name": "a-007.hbs",
+            "file": "src/app/patterns/01-atoms/a-007.hbs",
             "category": "atoms"
+        },
+        {
+            "title": "a-008",
+            "name": "a-008.hbs",
+            "file": "src/app/patterns/01-atoms/a-008.hbs",
+            "category": "atoms"
+        },
+        {
+            "title": "a-009",
+            "name": "a-009.hbs",
+            "file": "src/app/patterns/01-atoms/a-009.hbs",
+            "category": "atoms"
+        },
+        {
+            "title": "a-010",
+            "name": "a-010.hbs",
+            "file": "src/app/patterns/01-atoms/a-010.hbs",
+            "category": "atoms"
+        },
+        {
+            "title": "a-011",
+            "name": "a-011.hbs",
+            "file": "src/app/patterns/01-atoms/a-011.hbs",
+            "category": "atoms"
+        },
+        {
+            "title": "a-012",
+            "name": "a-012.hbs",
+            "file": "src/app/patterns/01-atoms/a-012.hbs",
+            "category": "atoms"
+        },
+        {
+            "title": "a-013",
+            "name": "a-013.hbs",
+            "file": "src/app/patterns/01-atoms/a-013.hbs",
+            "category": "atoms"
+        },
+        {
+            "title": "a-014",
+            "name": "a-014.hbs",
+            "file": "src/app/patterns/01-atoms/a-014.hbs",
+            "category": "atoms"
+        },
+        {
+            "title": "a-015",
+            "name": "a-015.hbs",
+            "file": "src/app/patterns/01-atoms/a-015.hbs",
+            "category": "atoms"
+        },
+        {
+            "title": "m-000",
+            "name": "m-000.hbs",
+            "file": "src/app/patterns/02-molecules/m-000.hbs",
+            "category": "molecules"
         },
         {
             "title": "m-001",

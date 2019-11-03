@@ -50,13 +50,13 @@ const saveConfig = (newConfig) => {
 
     const config = configPath;
 
-    newConfig.patterns = newConfig.patterns.sort((a, b) => {
+    let sortedPatterns = newConfig.patterns.sort((a, b) => {
 
         if (a.file > b.file) {
 
             return 1;
 
-        } else if (a.file > b.file) {
+        } else if (a.file < b.file) {
 
             return -1;
 
@@ -65,6 +65,18 @@ const saveConfig = (newConfig) => {
         return 0;
 
     })
+
+    console.log("New Config", newConfig.patterns.length);
+    sortedPatterns.forEach(element => {
+        console.log(element.file);
+    });
+
+    newConfig.patterns = sortedPatterns;
+
+    console.log("New Config", newConfig.patterns.length);
+    newConfig.patterns.forEach(element => {
+        console.log(element.file);
+    });
 
     try {
 
@@ -231,6 +243,7 @@ class Genconfig {
 
         curConfig = addItem(curConfig, affectedFile);
 
+
         saveConfig(curConfig);
 
         showStats(curConfig);
@@ -255,9 +268,9 @@ class Genconfig {
 
     }
 
-    static statupCheck() {
+    static startupCheck() {
 
-        log.info(chalk.bold('Startup Check:'));
+        log.info(chalk.bold('Startup Check:---'));
 
         let curConfig = loadConfig();
 
