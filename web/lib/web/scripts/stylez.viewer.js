@@ -114,7 +114,7 @@ pattern.then(function (data) {
 
   if (currentPatterns.length !== 0) {
     var patternsContainer = document.querySelector('.patterns');
-    var copyCpl = navigator && navigator.clipboard ? "<div title='copy' class='viewer-filename copy'>copy</div>" : "";
+    var copyCpl = navigator && navigator.clipboard ? "<div title='Copy to clip board' aria-label='Copy to clip board' class='viewer-filename copy'>copy</div>" : "";
     currentPatterns.forEach(function (pattern) {
       var curTemplate = stylez.templates[pattern.title];
       var templateContent;
@@ -128,7 +128,7 @@ pattern.then(function (data) {
 
       if (curTemplate !== undefined && templateContent !== 'undefined') {
         var evaledContent = evalHTML(templateContent);
-        var content = "<div data-category='".concat(pattern.category, "' class='viewer-pattern'>\n            <div class='viewer-header'>\n                <div title='").concat(pattern.title, "' class='viewer-title'>").concat(pattern.title, "</div>\n                ").concat(copyCpl, "\n                <div title='").concat(pattern.file, "' class='viewer-filename'>").concat(pattern.file.split('/').pop(), "</div>\n            </div>\n            <div class='viewer-content'>\n            ").concat(evaledContent, "\n            </div>\n            <pre class='viewer-code'>").concat(evaledContent.replace(/</g, '&lt;').replace(/>/g, '&gt;'), "</pre>\n            </div>");
+        var content = "<div data-category='".concat(pattern.category, "' class='viewer-pattern' aria-label='Pattern ").concat(pattern.title, "'>\n            <div class='viewer-header' aria-label='Header for ").concat(pattern.title, "' >\n                <div title='").concat(pattern.title, "' class='viewer-title'>").concat(pattern.title, "</div>\n                ").concat(copyCpl, "\n                <div title='").concat(pattern.file, "' class='viewer-filename' aria-lable='file location'>").concat(pattern.file.split('/').pop(), "</div>\n            </div>\n            <div class='viewer-content' aria-label='Content of ").concat(pattern.title, " pattern'>\n            ").concat(evaledContent, "\n            </div>\n            <pre class='viewer-code'>").concat(evaledContent.replace(/</g, '&lt;').replace(/>/g, '&gt;'), "</pre>\n            </div>");
         patternsContainer.insertAdjacentHTML('beforeend', content);
       }
     });

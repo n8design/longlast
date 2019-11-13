@@ -65,7 +65,7 @@ export class Stylez {
 
                 } else {
 
-                    throw "Error current status: " + response.status + " - " + url;
+                    throw 'Error current status: ' + response.status + ' - ' + url;
 
                 }
 
@@ -91,18 +91,6 @@ export class Stylez {
 
             let patternItems = data.patterns;
 
-
-
-            // data.patterns.sort((a, b) => {
-            //     if (a.file < b.file) {
-            //         return -1;
-            //     }
-            //     if (a.file > b.file) {
-            //         return 1;
-            //     }
-            //     return 0;
-            // })
-
             // create unique values first
             let categories = [...new Set(patternItems.map(item => item.category))];
             // create statistics object
@@ -119,7 +107,7 @@ export class Stylez {
             data.patterns.forEach(item => {
 
                 if (patternString[item.category] === undefined) {
-                    patternString[item.category] = "";
+                    patternString[item.category] = '';
                 }
 
                 patternString[item.category] += `<li><button 

@@ -91,7 +91,7 @@ function () {
                   if (response.status === 200) {
                     return response.json();
                   } else {
-                    throw "Error current status: " + response.status + " - " + url;
+                    throw 'Error current status: ' + response.status + ' - ' + url;
                   }
                 }).catch(function (error) {
                   console.error('ERROR :::', error);
@@ -125,16 +125,7 @@ function () {
 
       var patternString = {};
       pattern.then(function (data) {
-        var patternItems = data.patterns; // data.patterns.sort((a, b) => {
-        //     if (a.file < b.file) {
-        //         return -1;
-        //     }
-        //     if (a.file > b.file) {
-        //         return 1;
-        //     }
-        //     return 0;
-        // })
-        // create unique values first
+        var patternItems = data.patterns; // create unique values first
 
         var categories = _toConsumableArray(new Set(patternItems.map(function (item) {
           return item.category;
@@ -149,7 +140,7 @@ function () {
         var cateogryStat = {};
         data.patterns.forEach(function (item) {
           if (patternString[item.category] === undefined) {
-            patternString[item.category] = "";
+            patternString[item.category] = '';
           }
 
           patternString[item.category] += "<li><button \n                data-filter='".concat(item.category, "' \n                data-index='").concat(categoryStats[item.category], "' \n                class='a-toc-toggle'>").concat(item.title, "</button></li>");

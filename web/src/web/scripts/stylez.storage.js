@@ -51,8 +51,6 @@ class SessionStorage {
 
     static updateStatus(updates) {
 
-        console.log('Updates :::', updates);
-
         if (updates === undefined) {
 
             console.log('Updates ::: -', 'updates are undefine')
@@ -60,6 +58,8 @@ class SessionStorage {
             let defaultSession = this._returnDefault();
 
             let stylezSession = sessionStorage.getItem(STORAGE);
+
+            console.log('STYLEZ SESSION ::::', stylezSession)
 
             if (stylezSession === undefined ||
                 stylezSession === null) {
@@ -75,6 +75,7 @@ class SessionStorage {
 
                 newStatus.category = this._getSelectedCategory();
                 newStatus.deviceSize = this._getSelectedDeviceSize();
+                
                 // newStatus.index = null;
 
                 this._getSelectedCategory();

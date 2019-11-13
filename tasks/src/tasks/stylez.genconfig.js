@@ -64,16 +64,16 @@ const saveConfig = (newConfig) => {
 
         return 0;
 
-    })
+    });
 
-    console.log("New Config", newConfig.patterns.length);
+    console.log('New Config', newConfig.patterns.length);
     sortedPatterns.forEach(element => {
         console.log(element.file);
     });
 
     newConfig.patterns = sortedPatterns;
 
-    console.log("New Config", newConfig.patterns.length);
+    console.log('New Config', newConfig.patterns.length);
     newConfig.patterns.forEach(element => {
         console.log(element.file);
     });

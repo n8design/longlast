@@ -34,6 +34,23 @@ class Events {
     // Handle Category selection
     static filterCategories(event) {
 
+        if (event.target.dataset !== null &&
+            event.target.dataset.filter !== null &&
+            (["atoms", "molecules", "organism"].indexOf(event.target.dataset.filter) !== -1),
+            Events.detectUserClick(event)) {
+
+            let curSession = SessionStorage.getCurrentFilter();
+
+            curSession.category = event.target.dataset.filter;
+            curSession.index = null
+            curSession.maxIndex = null
+
+            SessionStorage.updateStatus(curSession);
+
+            console.log("WELLLLLLL:::::::", event.target.dataset.filter);
+
+        }
+
         let curButton = event.target,
             allButtons = document.querySelectorAll(CONSTANTS.dmAtomicFilter);
 
@@ -98,6 +115,7 @@ class Events {
     }
 
     static setTocFilter(event) {
+
         event.preventDefault();
         let curButton = event.target,
             curIndex = curButton.dataset.index,
@@ -111,7 +129,7 @@ class Events {
         SessionStorage.updateStatus(curSession);
 
         document.querySelector('.o-tocs').classList.remove('active');
-        
+
         let activeButton = document.querySelector(`button.a-filter[data-filter='${curFilter}']`);
         let allButtons = document.querySelectorAll(`button.a-filter`);
 
@@ -196,6 +214,10 @@ class Events {
                 itemSlider.classList.remove('hidden');
                 itemSlider.classList.add('show');
 
+                itemSlider.setAttribute('aria-hidden', false);
+                itemSlider.setAttribute('aria-disabled', false);
+
+
             }
 
 
@@ -208,9 +230,20 @@ class Events {
                 itemSlider.classList.add('hidden');
                 itemSlider.classList.remove('show');
 
+                itemSlider.setAttribute('aria-hidden', true);
+                itemSlider.setAttribute('aria-disabled', true);
+
             }
         }
 
+    }
+
+    /**
+     * Checks if user clicked or click was executed by script
+     * @param {Event} event 
+     */
+    static detectUserClick(event){
+        return event.screenX && event.screenX != 0 && event.screenY && event.screenY != 0
     }
 
 }

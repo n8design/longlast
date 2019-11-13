@@ -38,6 +38,15 @@ function () {
   }, {
     key: "filterCategories",
     value: function filterCategories(event) {
+      if (event.target.dataset !== null && event.target.dataset.filter !== null && ["atoms", "molecules", "organism"].indexOf(event.target.dataset.filter) !== -1, Events.detectUserClick(event)) {
+        var curSession = SessionStorage.getCurrentFilter();
+        curSession.category = event.target.dataset.filter;
+        curSession.index = null;
+        curSession.maxIndex = null;
+        SessionStorage.updateStatus(curSession);
+        console.log("WELLLLLLL:::::::", event.target.dataset.filter);
+      }
+
       var curButton = event.target,
           allButtons = document.querySelectorAll(CONSTANTS.dmAtomicFilter);
 
@@ -168,6 +177,8 @@ function () {
         if (itemSlider !== null) {
           itemSlider.classList.remove('hidden');
           itemSlider.classList.add('show');
+          itemSlider.setAttribute('aria-hidden', false);
+          itemSlider.setAttribute('aria-disabled', false);
         }
       } else {
         var _itemSlider = document.querySelector('.m-itemslider');
@@ -176,8 +187,22 @@ function () {
           _itemSlider.classList.add('hidden');
 
           _itemSlider.classList.remove('show');
+
+          _itemSlider.setAttribute('aria-hidden', true);
+
+          _itemSlider.setAttribute('aria-disabled', true);
         }
       }
+    }
+    /**
+     * Checks if user clicked or click was executed by script
+     * @param {Event} event 
+     */
+
+  }, {
+    key: "detectUserClick",
+    value: function detectUserClick(event) {
+      return event.screenX && event.screenX != 0 && event.screenY && event.screenY != 0;
     }
   }]);
 

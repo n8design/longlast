@@ -122,7 +122,7 @@ pattern.then(data => {
 
         const patternsContainer = document.querySelector('.patterns');
 
-        const copyCpl = navigator && navigator.clipboard ? "<div title='copy' class='viewer-filename copy'>copy</div>" : "";
+        const copyCpl = navigator && navigator.clipboard ? "<div title='Copy to clip board' aria-label='Copy to clip board' class='viewer-filename copy'>copy</div>" : "";
 
         currentPatterns.forEach(pattern => {
 
@@ -141,13 +141,13 @@ pattern.then(data => {
 
                 let evaledContent = evalHTML(templateContent);
 
-                const content = `<div data-category='${pattern.category}' class='viewer-pattern'>
-            <div class='viewer-header'>
+                const content = `<div data-category='${pattern.category}' class='viewer-pattern' aria-label='Pattern ${ pattern.title }'>
+            <div class='viewer-header' aria-label='Header for ${ pattern.title }' >
                 <div title='${ pattern.title }' class='viewer-title'>${ pattern.title }</div>
                 ${ copyCpl }
-                <div title='${pattern.file }' class='viewer-filename'>${pattern.file.split('/').pop()}</div>
+                <div title='${pattern.file }' class='viewer-filename' aria-lable='file location'>${pattern.file.split('/').pop()}</div>
             </div>
-            <div class='viewer-content'>
+            <div class='viewer-content' aria-label='Content of ${ pattern.title } pattern'>
             ${ evaledContent }
             </div>
             <pre class='viewer-code'>${ evaledContent.replace(/</g, '&lt;').replace(/>/g, '&gt;') }</pre>
