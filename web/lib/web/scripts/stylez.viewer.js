@@ -5,6 +5,15 @@ import "regenerator-runtime/runtime";
 
 var SessionStorage = require('./stylez.storage');
 
+var Prism = require('prismjs');
+
+document.onreadystatechange = function () {
+  if (document.readyState == "complete") {
+    console.debug(Prism);
+    console.debug(Prism.highlightAll(true));
+  }
+};
+
 var evalHTML = function evalHTML(partialHTML) {
   try {
     var parser = new DOMParser();
@@ -112,10 +121,11 @@ pattern.then(function (data) {
 
       if (curTemplate !== undefined && templateContent !== 'undefined') {
         var evaledContent = evalHTML(templateContent);
-        var content = "<div data-category='".concat(pattern.category, "' class='viewer-pattern' aria-label='Pattern ").concat(pattern.title, "'>\n            <div class='viewer-header' aria-label='Header for ").concat(pattern.title, "' >\n                <div title='").concat(pattern.title, "' class='viewer-title'>").concat(pattern.title, "</div>\n                ").concat(copyCpl, "\n                <div title='").concat(pattern.file, "' class='viewer-filename' aria-lable='file location'>").concat(pattern.file.split('/').pop(), "</div>\n            </div>\n            <div class='viewer-content' aria-label='Content of ").concat(pattern.title, " pattern'>\n            ").concat(evaledContent, "\n            </div>\n            <pre class='viewer-code'>").concat(evaledContent.replace(/</g, '&lt;').replace(/>/g, '&gt;'), "</pre>\n            </div>");
+        var content = "<div data-category='".concat(pattern.category, "' class='viewer-pattern' aria-label='Pattern ").concat(pattern.title, "'>\n            <div class='viewer-header' aria-label='Header for ").concat(pattern.title, "' >\n                <div title='").concat(pattern.title, "' class='viewer-title'>").concat(pattern.title, "</div>\n                ").concat(copyCpl, "\n                <div title='").concat(pattern.file, "' class='viewer-filename' aria-lable='file location'>").concat(pattern.file.split('/').pop(), "</div>\n            </div>\n            <div class='viewer-content' aria-label='Content of ").concat(pattern.title, " pattern'>\n            <div class='viewer-contentinner'>\n            ").concat(evaledContent, "\n            </div>\n            </div>\n            <pre class='viewer-code language-markup' data-manual><code>").concat(evaledContent.replace(/</g, '&lt;').replace(/>/g, '&gt;'), "</code></pre>\n            </div>");
         patternsContainer.insertAdjacentHTML('beforeend', content);
       }
     });
+    Prism.highlightAll();
     var copyElements = document.querySelectorAll('.copy');
     copyElements.forEach(function (item) {
       item.addEventListener('click', cpyToClipboard);

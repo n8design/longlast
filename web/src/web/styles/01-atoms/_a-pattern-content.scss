@@ -1,4 +1,9 @@
 .viewer-content{
 	box-sizing: border-box;
+	width: auto;
 	padding: 0 1em;
+
+	&inner{
+		display: inline-block;
+	}
 }

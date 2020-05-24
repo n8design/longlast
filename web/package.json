@@ -24,6 +24,7 @@
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^2.6.5",
     "modernizr": "^3.7.1",
+    "prismjs": "^1.20.0",
     "stylez-tasks": "file:../tasks"
   },
   "browserslist": [
@@ -53,6 +54,7 @@
     "@babel/polyfill": "^7.6.0",
     "@babel/preset-env": "^7.6.3",
     "babel-loader": "^8.0.6",
+    "babel-plugin-prismjs": "^2.0.1",
     "handlebars": "^4.4.3",
     "webpack": "^4.41.2",
     "webpack-stream": "^5.2.1"

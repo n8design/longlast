@@ -1,4 +1,15 @@
 const SessionStorage = require('./stylez.storage');
+const Prism = require('prismjs');
+
+document.onreadystatechange = function () {
+    if (document.readyState == "complete") {
+
+        console.debug(Prism);
+        console.debug(Prism.highlightAll(true));
+        
+    }
+}
+
 
 const evalHTML = (partialHTML) => {
 
@@ -80,7 +91,7 @@ pattern.then(data => {
     let currentFilter = SessionStorage.getCurrentFilter();
 
     if (curSession.category === 'pages' ||
-        curSession.category === 'templates' || currentFilter.index !== null) {
+        curSession.category === 'templates' || currentFilter.index !== null) {
 
         if (currentPatterns.length !== 0) {
 
@@ -148,9 +159,11 @@ pattern.then(data => {
                 <div title='${pattern.file }' class='viewer-filename' aria-lable='file location'>${pattern.file.split('/').pop()}</div>
             </div>
             <div class='viewer-content' aria-label='Content of ${ pattern.title } pattern'>
+            <div class='viewer-contentinner'>
             ${ evaledContent }
             </div>
-            <pre class='viewer-code'>${ evaledContent.replace(/</g, '&lt;').replace(/>/g, '&gt;') }</pre>
+            </div>
+            <pre class='viewer-code language-markup' data-manual><code>${ evaledContent.replace(/</g, '&lt;').replace(/>/g, '&gt;') }</code></pre>
             </div>`;
 
                 patternsContainer.insertAdjacentHTML('beforeend', content);
@@ -158,6 +171,8 @@ pattern.then(data => {
             }
 
         })
+
+        Prism.highlightAll();
 
         var copyElements = document.querySelectorAll('.copy');
 
