@@ -1,6 +1,12 @@
 // Defautl Toolbar height
 $toolbar-height: 38px;
 $c-yellow: yellow;
-$c-black: black;
+$c-red: red;
+$c-black: #161514;
 $c-white: white;
-$base-padding: .55em 0.7em .4em;
+$base-padding: .55em .7em .4em;
+// Atomic definitons;
+$c-button-highlight: $c-yellow;
+$c-button-hover: $c-red;
+$c-text: $c-black;
+$c-border-dark: $c-black;

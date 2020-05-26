@@ -1,16 +1,6 @@
 const SessionStorage = require('./stylez.storage');
 const Prism = require('prismjs');
 
-document.onreadystatechange = function () {
-    if (document.readyState == "complete") {
-
-        console.debug(Prism);
-        console.debug(Prism.highlightAll(true));
-        
-    }
-}
-
-
 const evalHTML = (partialHTML) => {
 
     try {
@@ -172,8 +162,6 @@ pattern.then(data => {
 
         })
 
-        Prism.highlightAll();
-
         var copyElements = document.querySelectorAll('.copy');
 
         copyElements.forEach(item => {
@@ -184,4 +172,6 @@ pattern.then(data => {
 
     }
 
+    // show markup code
+    Prism.highlightAll();
 })

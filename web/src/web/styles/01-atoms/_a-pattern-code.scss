@@ -1,3 +1,7 @@
 .viewer-code{
     @extend .viewer-content;
 }
+// PrismJS make font smaller
+pre[class*="language-"]{
+    font-size: 0.9rem;
+}

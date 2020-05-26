@@ -1,23 +1,33 @@
 .a-filter{
+	@include animated-bgColor;
+
 	font-weight: bold;
 
-	height: 23PX;
+	display: inline-block;
+
+	width: fit-content;
+	height: 23px;
+	margin-bottom: .3em;
 
 	text-transform: uppercase;
 
-	border: 2px $c-black solid;
+	border: 2px $c-border-dark solid;
 	border-radius: 0;
-    background-color: $c-white;
-    display: inline-block;
-    width: fit-content;
-    margin-bottom: 0.3em;
+	// background-color: $c-white;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 0px 40px;
 
 	&.selected,
 	&:active{
-		color: $c-black;
-		background-color: $c-yellow;
-    }
-    &:hover{
-        cursor: pointer;
-    }
+		color: $c-text;
+		// background-color: $c-button-highlight;
+	}
+	&:hover{
+		@include animated-bgColor;
+		@include bg-fill();
+
+		cursor: pointer;
+		// background-color: $c-button-highlight;
+	}
 }

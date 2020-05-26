@@ -7,13 +7,6 @@ var SessionStorage = require('./stylez.storage');
 
 var Prism = require('prismjs');
 
-document.onreadystatechange = function () {
-  if (document.readyState == "complete") {
-    console.debug(Prism);
-    console.debug(Prism.highlightAll(true));
-  }
-};
-
 var evalHTML = function evalHTML(partialHTML) {
   try {
     var parser = new DOMParser();
@@ -125,11 +118,13 @@ pattern.then(function (data) {
         patternsContainer.insertAdjacentHTML('beforeend', content);
       }
     });
-    Prism.highlightAll();
     var copyElements = document.querySelectorAll('.copy');
     copyElements.forEach(function (item) {
       item.addEventListener('click', cpyToClipboard);
     });
-  }
+  } // show markup code
+
+
+  Prism.highlightAll();
 });
 //# sourceMappingURL=stylez.viewer.js.map
