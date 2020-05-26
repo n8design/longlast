@@ -1,0 +1,12 @@
+$baseTiming: 5s;
+$baseAnimation: ease-in-out;
+
+@mixin animated-bgColor{
+	transition: all $baseTiming $baseAnimation 0s;
+}
+
+@mixin bg-fill($fill: blue){
+
+    $background-img-url: "url(\"data:image/svg+xml;utf8,<svg width='300' height='100' xmlns='http://www.w3.org/2000/svg'><rect width='300' height='100' style='fill: " + $fill +"' /></svg>\")";
+    background-image: #{$background-img-url};
+}
