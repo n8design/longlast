@@ -3,13 +3,20 @@
 	line-height: 1.5rem;
 
 	padding: 0;
+	padding: .125em .25em;
 
 	cursor: pointer;
+	transition: color 0 linear;
 	text-align: left;
 
 	border: none;
 	background-color: unset;
+
+	&.selected,
 	&:hover{
-		color: magenta;
+		transition: color 0 linear;
+
+		color: white;
+		background-color: black;
 	}
 }

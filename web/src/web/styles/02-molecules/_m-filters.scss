@@ -1,20 +1,17 @@
+.m-toc,
+.m-devicetypes,
 .m-filters{
 	padding: $base-padding;
 
 	&:hover{
 		.a-filter{
-			&:hover{
-				@include bg-fill();
-
-				// background-color: magenta;
-				background-size: 100% 40px;
-			}
-
 			&.selected{
-				background-color: transparent;
+				color: black;
+				background-size: 0;
+				background-color: white;
 
 				&:hover{
-					background-color: magenta;
+					color: white;
 					background-size: 100% 40px;
 				}
 			}

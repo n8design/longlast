@@ -1,31 +1,6 @@
-.o-tocs{
-	position: absolute;
-	z-index: 10;
+$slideOut: max-height 0.75s ease-in;
+$slideIn: max-height 0.75s ease-in, border-color 0.125s ease-out 0.75s;
 
-	overflow: hidden;
-
-	box-sizing: border-box;
-	width: 100%;
-	max-height: 0;
-
-	transition: max-height .25s ease-in-out 0,
-	border-bottom 5s ease-in-out .125s;
-
-	background-color: white;
-
-	&.active{
-		overflow: unset;
-
-		height: auto;
-		min-height: 50vh;
-		max-height: 100vh;
-
-		transition: max-height .25s ease-in-out 0,
-		border-bottom 5s ease-in-out .125s;
-
-		border-bottom: 1px $c-black solid;
-	}
-}
 .o-tocsinner{
 	display: flex;
 	flex-direction: row;
@@ -55,6 +30,50 @@
 			li{
 				padding: 0;
 			}
+		}
+	}
+}
+
+.o-tocs{
+	position: absolute;
+	z-index: 10;
+
+	overflow: hidden;
+
+	box-sizing: border-box;
+	width: 100%;
+	max-height: 0;
+	margin-top: -1px;
+
+	transition: $slideOut;
+
+	background-color: white;
+
+	border-bottom: 1px $c-black solid;
+	border-color: transparent;
+
+	.o-tocsinner{
+		max-height: 0;
+
+		transition: $slideOut;
+	}
+
+	&.active{
+		height: auto;
+		// min-height: 50vh;
+		max-height: 100vh;
+
+		transition: $slideIn;
+
+		border-color: $c-black;
+
+		.o-tocsinner{
+			display: block;
+			overflow: normal;
+
+			max-height: 100%;
+
+			transition: $slideOut;
 		}
 	}
 }

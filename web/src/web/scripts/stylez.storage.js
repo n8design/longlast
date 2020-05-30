@@ -53,13 +53,9 @@ class SessionStorage {
 
         if (updates === undefined) {
 
-            console.log('Updates ::: -', 'updates are undefine')
-
             let defaultSession = this._returnDefault();
 
             let stylezSession = sessionStorage.getItem(STORAGE);
-
-            console.log('STYLEZ SESSION ::::', stylezSession)
 
             if (stylezSession === undefined ||
                 stylezSession === null) {

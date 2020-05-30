@@ -53,12 +53,9 @@ function () {
     key: "updateStatus",
     value: function updateStatus(updates) {
       if (updates === undefined) {
-        console.log('Updates ::: -', 'updates are undefine');
-
         var defaultSession = this._returnDefault();
 
         var stylezSession = sessionStorage.getItem(STORAGE);
-        console.log('STYLEZ SESSION ::::', stylezSession);
 
         if (stylezSession === undefined || stylezSession === null) {
           this._getSelectedCategory();

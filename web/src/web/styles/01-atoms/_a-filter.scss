@@ -1,5 +1,7 @@
 .a-filter{
-	@include animated-bgColor;
+	@include animated-bgColor-out;
+	// background-color: $c-white;
+	@include bg-fill(black);
 
 	font-weight: bold;
 
@@ -13,21 +15,29 @@
 
 	border: 2px $c-border-dark solid;
 	border-radius: 0;
-	// background-color: $c-white;
 	background-repeat: no-repeat;
 	background-position: center center;
-	background-size: 0px 40px;
+	background-size: 0 40px;
+
+	&.selected{
+		background-color: black;
+	}
 
 	&.selected,
 	&:active{
-		color: $c-text;
+		@include bg-fill(black);
+		background-size: 100% 100%;
+
+		color: white;
 		// background-color: $c-button-highlight;
 	}
 	&:hover{
-		@include animated-bgColor;
-		@include bg-fill();
+		@include animated-bgColor-in;
 
 		cursor: pointer;
+
+		color: white;
+		background-size: 100% 100%;
 		// background-color: $c-button-highlight;
 	}
 }

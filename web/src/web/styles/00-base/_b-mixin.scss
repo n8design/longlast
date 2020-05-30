@@ -1,12 +1,18 @@
-$baseTiming: 5s;
-$baseAnimation: ease-in-out;
+$baseTiming: .125s;
+$baseAnimation-in: ease-out;
+$baseAnimation-out: ease-in;
 
-@mixin animated-bgColor{
-	transition: all $baseTiming $baseAnimation 0s;
+@mixin animated-bgColor-in(){
+	transition: all $baseTiming $baseAnimation-in 0s;
+}
+
+@mixin animated-bgColor-out(){
+	transition: all $baseTiming $baseAnimation-out 0s;
 }
 
 @mixin bg-fill($fill: blue){
 
     $background-img-url: "url(\"data:image/svg+xml;utf8,<svg width='300' height='100' xmlns='http://www.w3.org/2000/svg'><rect width='300' height='100' style='fill: " + $fill +"' /></svg>\")";
     background-image: #{$background-img-url};
+
 }

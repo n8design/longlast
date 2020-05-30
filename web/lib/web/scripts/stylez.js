@@ -9,6 +9,8 @@ import "core-js/modules/es6.string.iterator";
 import "core-js/modules/es6.set";
 import "regenerator-runtime/runtime";
 
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
@@ -124,14 +126,18 @@ function () {
         });
         var cateogryStat = {};
         data.patterns.forEach(function (item) {
+          console.log('Item', item);
+
           if (patternString[item.category] === undefined) {
             patternString[item.category] = '';
+          } else {
+            patternString[item.category] += "<li><button \n                data-filter='".concat(item.category, "' \n                data-index='").concat(categoryStats[item.category], "' \n                class='a-toc-toggle'>").concat(item.title, "</button></li>");
+            categoryStats[item.category] += 1;
           }
-
-          patternString[item.category] += "<li><button \n                data-filter='".concat(item.category, "' \n                data-index='").concat(categoryStats[item.category], "' \n                class='a-toc-toggle'>").concat(item.title, "</button></li>");
-          categoryStats[item.category] += 1;
         });
-        var tocOutput = "<ul><li><h2>Atoms</h2><ol>".concat(patternString['atoms'], "</ol></li></ul>\n            <ul><li><h2>Molecules</h2><ol>").concat(patternString['molecules'], "</ol></li></ul>\n            <ul><li><h2>Organism</h2><ol>").concat(patternString['organism'], "</ol></li></ul>\n            <ul><li><h2>Templates</h2><ol>").concat(patternString['templates'], "</ol></li></ul>\n            <ul><li><h2>Pages</h2><ol>").concat(patternString['pages'], "</ol></li></ul>");
+        console.log('patternString', patternString['atoms']); // Just in case no objects exist
+
+        var tocOutput = "<ul><li><h2>Atoms</h2><ol>".concat(_typeof(patternString['atoms']) !== undefined ? '' : patternString['atoms'], "</ol></li></ul>\n            <ul><li><h2>Molecules</h2><ol>").concat(_typeof(patternString['molecules']) !== undefined ? '' : patternString['molecules'], "</ol></li></ul>\n            <ul><li><h2>Organism</h2><ol>").concat(_typeof(patternString['organism']) !== undefined ? '' : patternString['organism'], "</ol></li></ul>\n            <ul><li><h2>Templates</h2><ol>").concat(_typeof(patternString['templates']) !== undefined ? '' : patternString['templates'], "</ol></li></ul>\n            <ul><li><h2>Pages</h2><ol>").concat(_typeof(patternString['pages']) !== undefined ? '' : patternString['pages'], "</ol></li></ul>");
         toc.innerHTML = tocOutput;
         document.querySelectorAll('.a-toc-toggle').forEach(function (item) {
           item.addEventListener('click', _this.Events.setTocFilter);
