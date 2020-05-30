@@ -1,0 +1,16 @@
+{
+    "patterns": [
+        {
+            "title": "test-2",
+            "name": "test-2.hbs",
+            "file": "src/patterns/01-atoms/test-2.hbs",
+            "category": "atoms"
+        },
+        {
+            "title": "test",
+            "name": "test.hbs",
+            "file": "src/patterns/01-atoms/test.hbs",
+            "category": "atoms"
+        }
+    ]
+}
