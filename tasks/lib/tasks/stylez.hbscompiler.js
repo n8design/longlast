@@ -25,7 +25,6 @@ const templateNamespace = 'stylez.templates';
 
 class HbsCompiler {
 
-
     static compile(src, dest) {
 
         let partials = gulp.src(src)

@@ -1,5 +1,6 @@
-const ConfigGenerator = require('./tasks/stylez.genconfig.js');
-const HbsCompiler = require('./tasks/stylez.hbscompiler.js');
+const ConfigGenerator = require('./tasks/stylez.genconfig');
+const HbsCompiler = require('./tasks/stylez.hbscompiler');
+const MarkDown = require('./tasks/stylez.markdown');
 
 class StylezTasks{
 
@@ -7,6 +8,7 @@ class StylezTasks{
 
         this.configGenerator = ConfigGenerator;
         this.hbsCompiler = HbsCompiler;
+        this.markDown = MarkDown;
 
     }
 

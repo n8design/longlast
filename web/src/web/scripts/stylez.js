@@ -106,41 +106,38 @@ export class Stylez {
 
             data.patterns.forEach(item => {
 
-                console.log('Item', item);
 
                 if (patternString[item.category] === undefined) {
                     patternString[item.category] = '';
-                } else {
+                }
 
-                    patternString[item.category] += `<li><button 
+                patternString[item.category] += `<li><button 
                 data-filter='${item.category}' 
                 data-index='${categoryStats[item.category]}' 
                 class='a-toc-toggle'>${item.title}</button></li>`;
 
-                    categoryStats[item.category] += 1;
-
-                }
+                categoryStats[item.category] += 1;
 
             });
 
-            console.log('patternString', patternString['atoms']);
+            console.log('patternString', patternString['atoms'], typeof (patternString['atoms']) === undefined, patternString, patternString['atoms']);
 
             // Just in case no objects exist
             let tocOutput =
                 `<ul><li><h2>Atoms</h2><ol>${
-                    typeof(patternString['atoms']) !== undefined ? '' : patternString['atoms']
+                    typeof(patternString['atoms']) === "undefined" ? '' : patternString['atoms']
                 }</ol></li></ul>
             <ul><li><h2>Molecules</h2><ol>${
-                typeof(patternString['molecules']) !== undefined ? '' : patternString['molecules']
+                typeof(patternString['molecules']) === "undefined" ? '' : patternString['molecules']
                 }</ol></li></ul>
             <ul><li><h2>Organism</h2><ol>${
-                    typeof(patternString['organism']) !== undefined ? '' : patternString['organism']
+                    typeof(patternString['organism']) === "undefined" ? '' : patternString['organism']
                 }</ol></li></ul>
             <ul><li><h2>Templates</h2><ol>${
-                typeof(patternString['templates']) !== undefined ? '' : patternString['templates']
+                typeof(patternString['templates']) === "undefined" ? '' : patternString['templates']
                 }</ol></li></ul>
             <ul><li><h2>Pages</h2><ol>${
-                typeof(patternString['pages']) !== undefined ? '' : patternString['pages']
+                typeof(patternString['pages']) === "undefined" ? '' : patternString['pages']
                 }</ol></li></ul>`;
 
             toc.innerHTML = tocOutput;

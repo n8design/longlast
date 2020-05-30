@@ -30,6 +30,7 @@
     "gulp-sourcemaps": "^2.6.5",
     "gulp-wrap": "^0.15.0",
     "handlebars": "^4.2.0",
+    "marked": "^1.1.0",
     "merge-stream": "^2.0.0"
   },
   "browserslist": [

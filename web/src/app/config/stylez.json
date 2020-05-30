@@ -1,3 +1,16 @@
 {
-    "patterns": []
+    "patterns": [
+        {
+            "title": "first-pattern",
+            "name": "first-pattern.hbs",
+            "file": "src/app/patterns/01-atoms/first-pattern.hbs",
+            "category": "atoms"
+        },
+        {
+            "title": "second-pattern",
+            "name": "second-pattern.hbs",
+            "file": "src/app/patterns/01-atoms/second-pattern.hbs",
+            "category": "atoms"
+        }
+    ]
 }

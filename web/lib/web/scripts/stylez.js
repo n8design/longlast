@@ -126,18 +126,16 @@ function () {
         });
         var cateogryStat = {};
         data.patterns.forEach(function (item) {
-          console.log('Item', item);
-
           if (patternString[item.category] === undefined) {
             patternString[item.category] = '';
-          } else {
-            patternString[item.category] += "<li><button \n                data-filter='".concat(item.category, "' \n                data-index='").concat(categoryStats[item.category], "' \n                class='a-toc-toggle'>").concat(item.title, "</button></li>");
-            categoryStats[item.category] += 1;
           }
-        });
-        console.log('patternString', patternString['atoms']); // Just in case no objects exist
 
-        var tocOutput = "<ul><li><h2>Atoms</h2><ol>".concat(_typeof(patternString['atoms']) !== undefined ? '' : patternString['atoms'], "</ol></li></ul>\n            <ul><li><h2>Molecules</h2><ol>").concat(_typeof(patternString['molecules']) !== undefined ? '' : patternString['molecules'], "</ol></li></ul>\n            <ul><li><h2>Organism</h2><ol>").concat(_typeof(patternString['organism']) !== undefined ? '' : patternString['organism'], "</ol></li></ul>\n            <ul><li><h2>Templates</h2><ol>").concat(_typeof(patternString['templates']) !== undefined ? '' : patternString['templates'], "</ol></li></ul>\n            <ul><li><h2>Pages</h2><ol>").concat(_typeof(patternString['pages']) !== undefined ? '' : patternString['pages'], "</ol></li></ul>");
+          patternString[item.category] += "<li><button \n                data-filter='".concat(item.category, "' \n                data-index='").concat(categoryStats[item.category], "' \n                class='a-toc-toggle'>").concat(item.title, "</button></li>");
+          categoryStats[item.category] += 1;
+        });
+        console.log('patternString', patternString['atoms'], _typeof(patternString['atoms']) === undefined, patternString, patternString['atoms']); // Just in case no objects exist
+
+        var tocOutput = "<ul><li><h2>Atoms</h2><ol>".concat(typeof patternString['atoms'] === "undefined" ? '' : patternString['atoms'], "</ol></li></ul>\n            <ul><li><h2>Molecules</h2><ol>").concat(typeof patternString['molecules'] === "undefined" ? '' : patternString['molecules'], "</ol></li></ul>\n            <ul><li><h2>Organism</h2><ol>").concat(typeof patternString['organism'] === "undefined" ? '' : patternString['organism'], "</ol></li></ul>\n            <ul><li><h2>Templates</h2><ol>").concat(typeof patternString['templates'] === "undefined" ? '' : patternString['templates'], "</ol></li></ul>\n            <ul><li><h2>Pages</h2><ol>").concat(typeof patternString['pages'] === "undefined" ? '' : patternString['pages'], "</ol></li></ul>");
         toc.innerHTML = tocOutput;
         document.querySelectorAll('.a-toc-toggle').forEach(function (item) {
           item.addEventListener('click', _this.Events.setTocFilter);

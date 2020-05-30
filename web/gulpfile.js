@@ -19,6 +19,12 @@ const isDev = !isProd && !isTest;
 
 const webpackStream = require('webpack-stream');
 
+let outfolder = '.tmp/'
+
+if(process.argv.indexOf('--dist')){
+    outfolder = 'dist/';
+}
+
 const {
     configGenerator,
     hbsCompiler
@@ -33,7 +39,7 @@ const serve = (cb) => {
     server.init({
         notify: false,
         server: {
-            baseDir: '.tmp/web/',
+            baseDir: ''+outfolder+'web/',
             directory: true,
             routes: {
                 '/app': './src/app/',
@@ -78,7 +84,7 @@ const serve = (cb) => {
 };
 
 const compileTemplates = async () => {
-    return await hbsCompiler.compile('src/app/patterns/**/*.hbs', './.tmp/web/scripts/');
+    return await hbsCompiler.compile('src/app/patterns/**/*.hbs', './'+outfolder+'web/scripts/');
 }
 
 const webpack = () => {
@@ -87,7 +93,7 @@ const webpack = () => {
         .pipe($.plumber())
         .pipe(
             webpackStream(require('./webpack.config.js')))
-        .pipe(dest('.tmp/web/scripts'));
+        .pipe(dest(''+outfolder+'web/scripts'));
 
 }
 
@@ -104,7 +110,7 @@ const styles = () => {
             autoprefixer()
         ]))
         .pipe($.if(!isProd, $.sourcemaps.write()))
-        .pipe(dest('.tmp/'))
+        .pipe(dest(''+outfolder+''))
         .pipe(server.reload({
             stream: true
         }));
@@ -126,10 +132,12 @@ const scripts = (cb) => {
 
 const html = () => {
     return src('src/web/**/*.html')
-        .pipe(dest('.tmp/web'));
+        .pipe(dest(''+outfolder+'web'));
 }
 
 configGenerator.startupCheck();
 
 exports.serve = series(html, styles, scripts, compileTemplates, serve);
+exports.build = series(html, styles, scripts, webpack);
+exports.buildDebug = series(html, styles, scripts, compileTemplates, webpack);
 exports.default = serve;
