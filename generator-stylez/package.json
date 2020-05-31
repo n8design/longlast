@@ -1,0 +1,45 @@
+{
+  "name": "generator-stylez",
+  "version": "0.0.1-beta1",
+  "description": "Yeoman generator and CLI for creating a new Style Guide",
+  "main": "index.js",
+  "bin": {
+    "stylez": "./bin/stylez.js"
+  },
+  "directories": {
+    "lib": "lib",
+    "app": "app"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/n8design/stylez.git"
+  },
+  "keywords": [
+    "Style Guide",
+    "Guide",
+    "Pattern",
+    "Library",
+    "Atomic",
+    "Design",
+    "SASS"
+  ],
+  "author": "Stefan Bauer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/n8design/stylez/issues"
+  },
+  "homepage": "https://github.com/n8design/stylez#readme",
+  "dependencies": {
+    "applicationinsights": "^1.7.5",
+    "chalk": "^4.0.0",
+    "update-notifier": "^4.1.0",
+    "yeoman-generator": "^4.10.1"
+  },
+  "devDependencies": {
+    "yeoman-assert": "^3.1.1",
+    "yeoman-test": "^2.6.0"
+  }
+}
