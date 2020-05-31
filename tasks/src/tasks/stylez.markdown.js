@@ -9,12 +9,8 @@ class MarkDown {
 
     covertMarkdown(src, dest) {
 
-        console.log('SRC :::', src);
-
         const mardownContent = fs.readFileSync(src, 'UTF-8');
         const htmlContent = marked(mardownContent);
-
-        console.log(htmlContent);
 
         return gulp.src(src)
             .pipe(gulp.dest('./.tmp'));

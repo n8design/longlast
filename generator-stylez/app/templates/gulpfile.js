@@ -6,6 +6,8 @@ const {
     series
 } = require('gulp');
 
+const path = require('path');
+
 const config = require('./.stylez.json');
 const browserSync = require('browser-sync');
 const reload = browserSync.reload;
@@ -22,8 +24,9 @@ const webpackStream = require('webpack-stream');
 
 const {
     configGenerator,
-    hbsCompiler
-} = require('stylez-tasks');
+    hbsCompiler,
+    webbase
+} = require('generator-stylez');
 
 // // Import Gulp plugins.
 // const babel = require('gulp-babel');
@@ -63,12 +66,12 @@ const serve = (cb) => {
     server.init({
         notify: false,
         server: {
-            baseDir: 'node_modules/stylez-web/dist/web',
+            baseDir: webbase,
             directory: true,
             routes: {
-                '/': './.tmp/',
-                '/node_modules': 'node_modules',
-                '/app/config': './config'
+                '/project/': path.resolve('./.tmp/'),
+                '/node_modules': path.resolve('node_modules'),
+                '/config': path.resolve('./config')
             },
             https: true
         },

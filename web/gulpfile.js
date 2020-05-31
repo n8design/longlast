@@ -30,10 +30,6 @@ const {
     hbsCompiler
 } = require('stylez-tasks');
 
-// // Import Gulp plugins.
-// const babel = require('gulp-babel');
-// const plumber = require('gulp-plumber');
-
 const serve = (cb) => {
 
     server.init({

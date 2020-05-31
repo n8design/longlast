@@ -120,8 +120,6 @@ export class Stylez {
 
             });
 
-            console.log('patternString', patternString['atoms'], typeof (patternString['atoms']) === undefined, patternString, patternString['atoms']);
-
             // Just in case no objects exist
             let tocOutput =
                 `<ul><li><h2>Atoms</h2><ol>${

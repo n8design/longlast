@@ -2,7 +2,7 @@
   "name": "generator-stylez",
   "version": "0.0.1-beta1",
   "description": "Yeoman generator and CLI for creating a new Style Guide",
-  "main": "index.js",
+  "main": "lib/index.js",
   "bin": {
     "stylez": "./bin/stylez.js"
   },
@@ -10,6 +10,11 @@
     "lib": "lib",
     "app": "app"
   },
+  "files": [
+    "app",
+    "bin",
+    "lib"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -24,7 +29,8 @@
     "Library",
     "Atomic",
     "Design",
-    "SASS"
+    "SASS",
+    "yeoman-generator"
   ],
   "author": "Stefan Bauer",
   "license": "ISC",
@@ -35,6 +41,13 @@
   "dependencies": {
     "applicationinsights": "^1.7.5",
     "chalk": "^4.0.0",
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-declare": "^0.3.0",
+    "gulp-handlebars": "^5.0.2",
+    "gulp-load-plugins": "^2.0.3",
+    "gulp-plumber": "^1.2.1",
+    "gulp-wrap": "^0.15.0",
     "update-notifier": "^4.1.0",
     "yeoman-generator": "^4.10.1"
   },

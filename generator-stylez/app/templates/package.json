@@ -1,5 +1,5 @@
 {
-  "name": "stylez-app",
+  "name": "<%= title %>",
   "version": "0.0.0",
   "description": "Stylez is just a Style Guide",
   "main": "index.js",
@@ -23,9 +23,7 @@
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^2.6.5",
     "modernizr": "^3.7.1",
-    "prismjs": "^1.20.0",
-    "stylez-tasks": "file:../tasks",
-    "stylez-web": "file:../web"
+    "prismjs": "^1.20.0"
   },
   "browserslist": [
     "> 1%",

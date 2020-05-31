@@ -47,8 +47,6 @@ class Events {
 
             SessionStorage.updateStatus(curSession);
 
-            console.log("WELLLLLLL:::::::", event.target.dataset.filter);
-
         }
 
         let curButton = event.target,
