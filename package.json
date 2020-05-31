@@ -1,0 +1,5 @@
+{
+    "scripts": {
+        "build": "node ./.bundle/bundle-generator.js"
+    }
+}

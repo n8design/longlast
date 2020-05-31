@@ -44,7 +44,6 @@ function () {
         curSession.index = null;
         curSession.maxIndex = null;
         SessionStorage.updateStatus(curSession);
-        console.log("WELLLLLLL:::::::", event.target.dataset.filter);
       }
 
       var curButton = event.target,
