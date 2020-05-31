@@ -9,7 +9,13 @@ const {
 
 const outDir = '../generator-stylez/lib/'
 
-process.chdir('web/')
+process.chdir('generator-stylez');
+const rimraf = require('rimraf');
+rimraf.sync('lib/tasks');
+rimraf.sync('lib/web');
+
+
+process.chdir('../web/')
 
 console.log('Compile Web Build Start');
 spawnSync('gulp', ['build']);
