@@ -1,12 +1,9 @@
 // const fs = require('fs');
+const fs = require('fs');
 const path = require('path');
 const log = require('fancy-log');
 const chalk = require('chalk');
-const fs = require('fs');
-console.log('Configpath', process.cwd());
 const configPath = path.resolve(path.join(process.cwd(), '/config/stylez.json'));
-
-
 const cwd = process.cwd();
 
 const patternItem = {
@@ -69,13 +66,13 @@ const saveConfig = (newConfig) => {
     });
 
     sortedPatterns.forEach(element => {
-        console.log(element.file);
+        log(element.file);
     });
 
     newConfig.patterns = sortedPatterns;
 
     newConfig.patterns.forEach(element => {
-        console.log(element.file);
+        log(element.file);
     });
 
     try {
