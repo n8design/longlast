@@ -1,6 +1,6 @@
 {
     "scripts": {
-        "build": "node ./.bundle/bundle-generator.js"
+        "build": "node ./bundle-generator.js"
     },
     "devDependencies": {
         "rimraf": "^3.0.2"

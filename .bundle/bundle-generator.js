@@ -9,7 +9,7 @@ const {
 
 const outDir = '../generator-stylez/lib/'
 
-process.chdir('generator-stylez');
+process.chdir('../generator-stylez');
 const rimraf = require('rimraf');
 rimraf.sync('lib/tasks');
 rimraf.sync('lib/web');
