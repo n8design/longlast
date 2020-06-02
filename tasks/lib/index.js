@@ -2,8 +2,6 @@ const path = require('path');
 const ConfigGenerator = require('./tasks/stylez.genconfig');
 const HbsCompiler = require('./tasks/stylez.hbscompiler');
 
-console.log(__dirname);
-
 class StylezTasks{
 
     constructor(){
@@ -11,8 +9,6 @@ class StylezTasks{
         this.configGenerator = ConfigGenerator;
         this.hbsCompiler = HbsCompiler;
         this.webbase = path.join(__dirname, '../web/');
-
-        console.log('this.webbase', this.webbase)
 
     }
 
