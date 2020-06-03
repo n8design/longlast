@@ -38,7 +38,7 @@ const serve = (cb) => {
             baseDir: ''+outfolder+'web/',
             directory: true,
             routes: {
-                '/app': './src/app/',
+                '/config/': './config/',
                 '/node_modules': 'node_modules'
             },
             https: true
