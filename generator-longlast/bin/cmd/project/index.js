@@ -14,7 +14,7 @@ const caller = (args) => {
 
 const run = (options) => {
 
-    return spawn('yo', ['stylez'], {
+    return spawn('yo', ['longlast'], {
         stdio: 'inherit'
     });
 
