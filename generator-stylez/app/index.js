@@ -57,6 +57,11 @@ class StylezGenerator extends Generator {
         )
 
         this.fs.copy(
+            this.templatePath('.csscomb.json'),
+            this.destinationPath('.csscomb.json')
+        )
+
+        this.fs.copy(
             this.templatePath('src'),
             this.destinationPath('src')
         )
