@@ -131,7 +131,7 @@ const scripts = (cb) => {
 
 }
 
-configGenerator.startupCheck();
+series(configGenerator.startupCheck, compileTemplates);
 
-exports.serve = series(styles, scripts, baseWatch,compileTemplates, serve);
+exports.serve = series(styles, scripts, baseWatch, compileTemplates, serve);
 exports.default = serve;
