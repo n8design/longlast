@@ -1,5 +1,6 @@
-import "core-js/modules/es6.regexp.replace";
 import "core-js/modules/es6.regexp.split";
+import "core-js/modules/es6.function.name";
+import "core-js/modules/es6.regexp.replace";
 import "core-js/modules/es6.array.sort";
 import "regenerator-runtime/runtime";
 
@@ -102,7 +103,7 @@ pattern.then(function (data) {
     var patternsContainer = document.querySelector('.patterns');
     var copyCpl = navigator && navigator.clipboard ? "<div title='Copy to clip board' aria-label='Copy to clip board' class='viewer-filename copy'>copy</div>" : "";
     currentPatterns.forEach(function (pattern) {
-      var curTemplate = stylez.templates[pattern.title];
+      var curTemplate = stylez.templates[pattern.name.replace(/.hbs/ig, '')];
       var templateContent;
 
       try {

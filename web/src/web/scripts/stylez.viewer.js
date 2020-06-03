@@ -127,7 +127,7 @@ pattern.then(data => {
 
         currentPatterns.forEach(pattern => {
 
-            let curTemplate = stylez.templates[pattern.title];
+            let curTemplate = stylez.templates[pattern.name.replace(/.hbs/ig, '')];
 
             let templateContent;
 
