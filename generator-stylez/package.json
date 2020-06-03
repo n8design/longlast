@@ -4,7 +4,7 @@
   "description": "Yeoman generator and CLI for creating a new Style Guide",
   "main": "lib/index.js",
   "bin": {
-    "stylez": "./bin/stylez.js"
+    "longlast": "./bin/longlast.js"
   },
   "directories": {
     "lib": "lib",
@@ -39,7 +39,7 @@
   },
   "homepage": "https://github.com/n8design/stylez#readme",
   "dependencies": {
-    "applicationinsights": "^1.7.5",
+    "applicationinsights": "^1.7.6",
     "chalk": "^4.0.0",
     "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1",

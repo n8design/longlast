@@ -32,15 +32,9 @@ const {
 // const babel = require('gulp-babel');
 // const plumber = require('gulp-plumber');
 
-const serve = (cb) => {
-
+const baseWatch = async (cb) => {
     watch(['src/**/*.scss'], styles);
     watch(['src/**/*.js'], series(scripts, webpack));
-    // watch([
-    //         'src/**/*.html',
-    //         'src/images/**/*'
-    //     ], html)
-    //     .on('change', server.reload);
 
     watch([`${config.patternDir}**/*.hbs`])
         .on('add', (path) => {
@@ -63,15 +57,20 @@ const serve = (cb) => {
             })
         });
 
+        cb();
+}
+
+const serve = (cb) => {
+
     server.init({
         notify: false,
         server: {
             baseDir: webbase,
             directory: true,
             routes: {
-                '/project/': path.resolve('./.tmp/'),
                 '/node_modules': path.resolve('node_modules'),
-                '/config': path.resolve('./config')
+                '/config': path.resolve('./config'),
+                '/': './.tmp/',
             },
             https: true
         },
@@ -132,12 +131,7 @@ const scripts = (cb) => {
 
 }
 
-const html = () => {
-    return src('src/**/*.html')
-        .pipe(dest('.tmp/'));
-}
-
 configGenerator.startupCheck();
 
-exports.serve = series(html, styles, scripts, compileTemplates, serve);
+exports.serve = series(styles, scripts, baseWatch,compileTemplates, serve);
 exports.default = serve;
