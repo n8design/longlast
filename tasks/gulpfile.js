@@ -12,7 +12,8 @@ const gulpLoadPlugins = require('gulp-load-plugins');
 const $ = gulpLoadPlugins();
 const autoprefixer = require('autoprefixer');
 
-const isProd = process.env.NODE_ENV === 'production';
+const isProd = process.argv.indexOf('--production');
+console.log('IS PRODUCTION:::', isProd)
 const isTest = process.env.NODE_ENV === 'test';
 const isDev = !isProd && !isTest;
 

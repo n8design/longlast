@@ -67,4 +67,3 @@ class HbsCompiler {
 }
 
 module.exports = HbsCompiler;
-//# sourceMappingURL=stylez.hbscompiler.js.map

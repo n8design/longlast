@@ -36,6 +36,10 @@ const baseWatch = async (cb) => {
     watch(['src/**/*.scss'], styles);
     watch(['src/**/*.js'], series(scripts, webpack));
 
+    watch(['config/**.json']).on('change', ()=>{
+        server.reload()
+    })
+
     watch([`${config.patternDir}**/*.hbs`])
         .on('add', (path) => {
             configGenerator.added(path);
@@ -57,7 +61,7 @@ const baseWatch = async (cb) => {
             })
         });
 
-        cb();
+    cb();
 }
 
 const serve = (cb) => {

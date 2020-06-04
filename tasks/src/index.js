@@ -8,8 +8,8 @@ class StylezTasks{
 
         this.configGenerator = ConfigGenerator;
         this.hbsCompiler = HbsCompiler;
-        this.webbase = path.join(__dirname, '../web/');
-
+        this.webbase = path.join(__dirname, '/web');
+        
     }
 
 }

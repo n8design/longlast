@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const gulp = require('gulp');
 const fs = require('fs');
@@ -11,9 +11,10 @@ class MarkDown {
 
         const mardownContent = fs.readFileSync(src, 'UTF-8');
         const htmlContent = marked(mardownContent);
+        console.log(htmlContent)
 
         return gulp.src(src)
-            .pipe(gulp.dest('./.tmp'));
+            .pipe(gulp.dest(dest));
 
     }
 

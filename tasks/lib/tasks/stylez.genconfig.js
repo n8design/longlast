@@ -317,4 +317,3 @@ class Genconfig {
 }
 
 module.exports = Genconfig;
-//# sourceMappingURL=stylez.genconfig.js.map

@@ -8,8 +8,8 @@ class StylezTasks{
 
         this.configGenerator = ConfigGenerator;
         this.hbsCompiler = HbsCompiler;
-        this.webbase = path.join(__dirname, '../web/');
-
+        this.webbase = path.join(__dirname, '/web');
+        
     }
 
 }
@@ -17,4 +17,3 @@ class StylezTasks{
 const instance = new StylezTasks();
 
 module.exports = instance;
-//# sourceMappingURL=index.js.map
