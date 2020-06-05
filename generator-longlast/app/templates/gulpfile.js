@@ -8,7 +8,7 @@ const {
 
 const path = require('path');
 
-const config = require('./.stylez.json');
+const config = require('./.longlast.json');
 const browserSync = require('browser-sync');
 const reload = browserSync.reload;
 const gulpLoadPlugins = require('gulp-load-plugins');

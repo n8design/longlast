@@ -1,7 +1,8 @@
 const Generator = require('yeoman-generator');
-const StylezSay = require('../lib/tools/stylezsay');
 
 const promptConfig = require('./promptConfig');
+
+const commandExists = require('command-exists').sync;
 
 class StylezGenerator extends Generator {
 
@@ -9,14 +10,13 @@ class StylezGenerator extends Generator {
 
         super(args, opts);
 
-        this.option('projectname');
+        this.options['skip-install'];
 
     }
 
     // Initialisation generator
     initializing() {
 
-        StylezSay();
         console.log('1. Init');
 
     }
@@ -25,6 +25,8 @@ class StylezGenerator extends Generator {
     async prompting() {
 
         const answers = await this.prompt(promptConfig);
+
+        this.appname = answers.appname;
 
     }
 
@@ -37,7 +39,7 @@ class StylezGenerator extends Generator {
     // adds additonal editor support in this case CSS Comb
     writing() {
 
-        this.appname
+        console.log("THIS APPNAME:::", this.appname);
         // Currently not supported don't use this
         this.fs.copyTpl(
             this.templatePath('package.json'),
@@ -52,8 +54,8 @@ class StylezGenerator extends Generator {
         )
 
         this.fs.copy(
-            this.templatePath('.stylez.json'),
-            this.destinationPath('.stylez.json')
+            this.templatePath('.longlast.json'),
+            this.destinationPath('.longlast.json')
         )
 
         this.fs.copy(
@@ -83,11 +85,17 @@ class StylezGenerator extends Generator {
 
     // adds additonal editor support in this case CSS Comb
     install() {
-        console.log('5. configure');
         /**
          * Place your custom deployment code in here
          */
+        const hasYarn = commandExists('yarn');
 
+        this.installDependencies({
+            npm: !hasYarn,
+            yarn: hasYarn,
+            bower: false,
+            skipMessage: this.options['skip-install-message']
+        });
     }
 
     // Run installer normally time to say goodbye
