@@ -77,7 +77,7 @@ function () {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              url = './app/config/stylez.json';
+              url = './config/stylez.json';
               _context.next = 3;
               return regeneratorRuntime.awrap(fetch(url).then(function (response) {
                 if (response.status === 200) {
@@ -144,4 +144,3 @@ function () {
   return Stylez;
 }();
 var ui = new Stylez();
-//# sourceMappingURL=stylez.js.map

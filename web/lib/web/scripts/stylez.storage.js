@@ -123,4 +123,3 @@ function () {
 }();
 
 module.exports = SessionStorage;
-//# sourceMappingURL=stylez.storage.js.map

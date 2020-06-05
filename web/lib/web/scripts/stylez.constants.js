@@ -8,4 +8,3 @@ module.exports = {
   curHeight: '.a-input.js-curHeight',
   pagers: '.m-itemslider .a-filter'
 };
-//# sourceMappingURL=stylez.constants.js.map

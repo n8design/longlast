@@ -13,11 +13,15 @@ const $ = gulpLoadPlugins();
 const autoprefixer = require('autoprefixer');
 const server = browserSync.create();
 
-const isProd = process.env.NODE_ENV === 'production';
+const isProd = process.argv.indexOf('--production') !== -1;
 const isTest = process.env.NODE_ENV === 'test';
 const isDev = !isProd && !isTest;
 
 const webpackStream = require('webpack-stream');
+
+console.log(process.argv.indexOf('--production') !== -1)
+console.log(isProd === true)
+
 
 let outfolder = '.tmp/'
 
@@ -38,7 +42,7 @@ const serve = (cb) => {
             baseDir: ''+outfolder+'web/',
             directory: true,
             routes: {
-                '/app/config/': './config/',
+                '/config/': './config/',
                 '/node_modules': 'node_modules'
             },
             https: true
@@ -85,10 +89,16 @@ const compileTemplates = async () => {
 
 const webpack = () => {
 
+    var webpackConfig = require('./webpack.config.js');
+
+    if(isProd){
+        webpackConfig.mode = 'production';
+    }
+
     return src('lib/**/*.js')
         .pipe($.plumber())
         .pipe(
-            webpackStream(require('./webpack.config.js')))
+            webpackStream(webpackConfig))
         .pipe(dest(''+outfolder+'web/scripts'));
 
 }

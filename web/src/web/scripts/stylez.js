@@ -54,7 +54,7 @@ export class Stylez {
 
     async _fetchPattern() {
 
-        let url = './app/config/stylez.json';
+        let url = './config/stylez.json';
 
         return await fetch(url)
             .then((response) => {

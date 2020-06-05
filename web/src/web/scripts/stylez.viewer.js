@@ -33,7 +33,7 @@ const cpyToClipboard = (event) => {
 
 const fetchPattern = async () => {
 
-    let url = './app/config/stylez.json';
+    let url = './config/stylez.json';
 
     return fetch(url)
         .then((response) => {

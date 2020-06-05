@@ -49,4 +49,3 @@ function () {
 }();
 
 module.exports = StylezData;
-//# sourceMappingURL=styles.data.js.map

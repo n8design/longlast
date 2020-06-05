@@ -4,4 +4,3 @@ export var GetBacon = function GetBacon() {
   });
   return body;
 };
-//# sourceMappingURL=utils.js.map

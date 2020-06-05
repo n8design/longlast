@@ -37,7 +37,7 @@ var fetchPattern = function fetchPattern() {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          url = './app/config/stylez.json';
+          url = './config/stylez.json';
           return _context.abrupt("return", fetch(url).then(function (response) {
             if (response.status === 200) {
               return response.json();
@@ -128,4 +128,3 @@ pattern.then(function (data) {
 
   Prism.highlightAll();
 });
-//# sourceMappingURL=stylez.viewer.js.map

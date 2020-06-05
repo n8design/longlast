@@ -655,4 +655,3 @@ Prism.languages.scss = Prism.languages.extend("css", {
     lookbehind: !0
   }
 }), Prism.languages.scss.atrule.inside.rest = Prism.languages.scss;
-//# sourceMappingURL=prism.js.map
