@@ -1,16 +1,24 @@
 #!/usr/bin/env node
 
+// core
+const yargs = require('yargs');
+
 // projects 
 const project = require('./cmd/project');
 const gulp = require('./cmd/gulp');
 
+switch (yargs.argv._[0]) {
+    case "new":
+        project();    
+        break;
 
-if(process.argv[0] === "project"){
-    project();
-}
-if(process.argv[0] === "serve "){
-    gulp();
-}
+    case "serve":
+        gulp();    
+        break;
 
+    default:
+
+        break;
+}
 
 

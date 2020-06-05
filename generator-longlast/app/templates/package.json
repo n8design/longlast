@@ -1,5 +1,5 @@
 {
-  "name": "<%= title %>",
+  "name": "<%= title.toLowerCase().replace(/\ /ig, '-') %>",
   "version": "0.0.0",
   "description": "Stylez is just a Style Guide",
   "main": "index.js",
