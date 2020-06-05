@@ -4,7 +4,8 @@
   "description": "Yeoman generator and CLI for creating a new Style Guide",
   "main": "lib/index.js",
   "bin": {
-    "longlast": "./bin/longlast.js"
+    "longlast": "./bin/longlast.js",
+    "ll": "./bin/longlast.js"
   },
   "directories": {
     "lib": "lib",

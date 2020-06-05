@@ -1,7 +1,7 @@
 const Generator = require('yeoman-generator');
+const yosay = require('../lib/utils/longlast-say');
 
 const promptConfig = require('./promptConfig');
-
 const commandExists = require('command-exists').sync;
 
 class StylezGenerator extends Generator {
@@ -11,6 +11,8 @@ class StylezGenerator extends Generator {
         super(args, opts);
 
         this.options['skip-install'];
+
+        yosay();
 
     }
 
