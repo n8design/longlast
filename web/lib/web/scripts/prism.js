@@ -1,9 +1,3 @@
-import "core-js/modules/es6.regexp.constructor";
-import "core-js/modules/es6.regexp.match";
-import "core-js/modules/es6.regexp.to-string";
-import "core-js/modules/es6.object.to-string";
-import "core-js/modules/es6.regexp.replace";
-
 /* PrismJS 1.20.0
 https://prismjs.com/download.html#themes=prism-okaidia&languages=markup+css+clike+javascript+scss */
 var _self = "undefined" != typeof window ? window : "undefined" != typeof WorkerGlobalScope && self instanceof WorkerGlobalScope ? self : {},
@@ -655,3 +649,4 @@ Prism.languages.scss = Prism.languages.extend("css", {
     lookbehind: !0
   }
 }), Prism.languages.scss.atrule.inside.rest = Prism.languages.scss;
+//# sourceMappingURL=prism.js.map

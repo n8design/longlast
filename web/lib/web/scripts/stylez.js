@@ -1,27 +1,31 @@
-import "core-js/modules/es6.array.from";
-import "core-js/modules/es6.regexp.to-string";
-import "core-js/modules/es7.symbol.async-iterator";
-import "core-js/modules/es6.symbol";
-import "core-js/modules/web.dom.iterable";
-import "core-js/modules/es6.array.iterator";
-import "core-js/modules/es6.object.to-string";
-import "core-js/modules/es6.string.iterator";
-import "core-js/modules/es6.set";
-import "regenerator-runtime/runtime";
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
 
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+// require("@babel/polyfill");
+require("core-js/stable");
+
+require("regenerator-runtime/runtime");
+
+require("whatwg-fetch");
 
 var _CONSTANTS = require('./stylez.constants');
 
@@ -30,9 +34,7 @@ var SessionStorage = require('./stylez.storage');
 var Events = require('./stylez.events'); // const Data = require('./styles.data');
 
 
-export var Stylez =
-/*#__PURE__*/
-function () {
+export var Stylez = /*#__PURE__*/function () {
   function Stylez() {
     _classCallCheck(this, Stylez);
 
@@ -71,34 +73,42 @@ function () {
 
   _createClass(Stylez, [{
     key: "_fetchPattern",
-    value: function _fetchPattern() {
-      var url;
-      return regeneratorRuntime.async(function _fetchPattern$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              url = './config/stylez.json';
-              _context.next = 3;
-              return regeneratorRuntime.awrap(fetch(url).then(function (response) {
-                if (response.status === 200) {
-                  return response.json();
-                } else {
-                  throw 'Error current status: ' + response.status + ' - ' + url;
-                }
-              }).catch(function (error) {
-                console.error('ERROR :::', error);
-              }));
+    value: function () {
+      var _fetchPattern2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        var url;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                url = './config/stylez.json';
+                _context.next = 3;
+                return fetch(url).then(function (response) {
+                  if (response.status === 200) {
+                    return response.json();
+                  } else {
+                    throw 'Error current status: ' + response.status + ' - ' + url;
+                  }
+                }).catch(function (error) {
+                  console.error('ERROR :::', error);
+                });
 
-            case 3:
-              return _context.abrupt("return", _context.sent);
+              case 3:
+                return _context.abrupt("return", _context.sent);
 
-            case 4:
-            case "end":
-              return _context.stop();
+              case 4:
+              case "end":
+                return _context.stop();
+            }
           }
-        }
-      });
-    }
+        }, _callee);
+      }));
+
+      function _fetchPattern() {
+        return _fetchPattern2.apply(this, arguments);
+      }
+
+      return _fetchPattern;
+    }()
   }, {
     key: "renderToc",
     value: function renderToc() {
@@ -144,3 +154,4 @@ function () {
   return Stylez;
 }();
 var ui = new Stylez();
+//# sourceMappingURL=stylez.js.map

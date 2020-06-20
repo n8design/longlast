@@ -28,7 +28,11 @@ class StylezGenerator extends Generator {
 
         const answers = await this.prompt(promptConfig);
 
-        this.appname = answers.appname;
+        this.app = {
+            appname: answers.appname,
+            appDescription: answers.appdescription
+        }
+        
 
     }
 
@@ -46,7 +50,8 @@ class StylezGenerator extends Generator {
         this.fs.copyTpl(
             this.templatePath('package.json'),
             this.destinationPath('package.json'), {
-                title: this.appname
+                title: this.app.appname,
+                description: this.app.appDescription
             }
         )
 

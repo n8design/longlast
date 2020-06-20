@@ -8,6 +8,11 @@ const promptConfig = [
         message: 'Name your project:',
         name: 'appname',
         default: this.appname
+    },
+    {
+        type: 'input',
+        message: 'Description',
+        name: 'appdescription'
     }
 ]
 

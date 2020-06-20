@@ -1,0 +1,14 @@
+{
+  "name": "longlast-cli",
+  "version": "0.0.0",
+  "description": "Longlast CLI for creating new LongLast Projects",
+  "main": "index.js",
+  "bin": {
+    "longlast-cli": "longlast.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Stefan Bauer",
+  "license": "MIT"
+}

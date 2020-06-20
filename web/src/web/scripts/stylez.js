@@ -1,3 +1,8 @@
+// require("@babel/polyfill");
+require("core-js/stable");
+require("regenerator-runtime/runtime");
+require("whatwg-fetch");
+
 const _CONSTANTS = require('./stylez.constants');
 const SessionStorage = require('./stylez.storage');
 const Events = require('./stylez.events');

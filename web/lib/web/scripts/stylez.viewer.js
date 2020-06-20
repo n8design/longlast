@@ -1,8 +1,12 @@
-import "core-js/modules/es6.regexp.split";
-import "core-js/modules/es6.function.name";
-import "core-js/modules/es6.regexp.replace";
-import "core-js/modules/es6.array.sort";
-import "regenerator-runtime/runtime";
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+require("core-js/stable");
+
+require("regenerator-runtime/runtime");
+
+require("whatwg-fetch");
 
 var SessionStorage = require('./stylez.storage');
 
@@ -31,30 +35,36 @@ var cpyToClipboard = function cpyToClipboard(event) {
   }
 };
 
-var fetchPattern = function fetchPattern() {
-  var url;
-  return regeneratorRuntime.async(function fetchPattern$(_context) {
-    while (1) {
-      switch (_context.prev = _context.next) {
-        case 0:
-          url = './config/stylez.json';
-          return _context.abrupt("return", fetch(url).then(function (response) {
-            if (response.status === 200) {
-              return response.json();
-            } else {
-              throw "Error current status: " + response.status + " - " + url;
-            }
-          }).catch(function (error) {
-            console.error('ERROR :::', error);
-          }));
+var fetchPattern = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+    var url;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            url = './config/stylez.json';
+            return _context.abrupt("return", fetch(url).then(function (response) {
+              if (response.status === 200) {
+                return response.json();
+              } else {
+                throw "Error current status: " + response.status + " - " + url;
+              }
+            }).catch(function (error) {
+              console.error('ERROR :::', error);
+            }));
 
-        case 2:
-        case "end":
-          return _context.stop();
+          case 2:
+          case "end":
+            return _context.stop();
+        }
       }
-    }
-  });
-};
+    }, _callee);
+  }));
+
+  return function fetchPattern() {
+    return _ref.apply(this, arguments);
+  };
+}();
 
 var pattern = fetchPattern(); // let pattern = StylezData.Pattern();
 
@@ -128,3 +138,4 @@ pattern.then(function (data) {
 
   Prism.highlightAll();
 });
+//# sourceMappingURL=stylez.viewer.js.map

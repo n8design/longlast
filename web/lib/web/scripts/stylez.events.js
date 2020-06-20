@@ -8,9 +8,7 @@ var CONSTANTS = require('./stylez.constants');
 
 var SessionStorage = require('./stylez.storage');
 
-var Events =
-/*#__PURE__*/
-function () {
+var Events = /*#__PURE__*/function () {
   function Events() {
     _classCallCheck(this, Events);
   }
@@ -209,3 +207,4 @@ function () {
 }();
 
 module.exports = Events;
+//# sourceMappingURL=stylez.events.js.map

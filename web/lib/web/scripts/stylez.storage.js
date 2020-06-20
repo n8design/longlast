@@ -8,9 +8,7 @@ var _CONSTANTS = require('./stylez.constants');
 
 var STORAGE = 'stylez';
 
-var SessionStorage =
-/*#__PURE__*/
-function () {
+var SessionStorage = /*#__PURE__*/function () {
   function SessionStorage() {
     _classCallCheck(this, SessionStorage);
   }
@@ -123,3 +121,4 @@ function () {
 }();
 
 module.exports = SessionStorage;
+//# sourceMappingURL=stylez.storage.js.map

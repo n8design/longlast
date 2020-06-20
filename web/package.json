@@ -5,28 +5,28 @@
   "main": "index.js",
   "lib": "dist/web",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "gulp build --dist"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Stefan Bauer (@stfbauer)",
   "license": "MIT",
   "dependencies": {
     "browser-sync": "^2.26.7",
-    "core-js": "^2.5.7",
-    "cross-env": "^6.0.3",
+    "core-js": "^3.6.5",
+    "cross-env": "^7.0.2",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-babel": "^8.0.0",
     "gulp-eslint": "^6.0.0",
     "gulp-if": "^3.0.0",
-    "gulp-load-plugins": "^2.0.1",
+    "gulp-load-plugins": "^2.0.3",
     "gulp-plumber": "^1.2.1",
     "gulp-postcss": "^8.0.0",
     "gulp-sass": "^4.1.0",
     "gulp-sourcemaps": "^2.6.5",
-    "modernizr": "^3.7.1",
+    "modernizr": "^3.11.2",
     "prismjs": "^1.20.0",
-    "stylez-tasks": "file:../tasks"
+    "stylez-tasks": "file:../tasks",
+    "whatwg-fetch": "^3.0.0"
   },
   "browserslist": [
     "> 1%",
@@ -50,14 +50,14 @@
     }
   },
   "devDependencies": {
-    "@babel/core": "^7.6.4",
-    "@babel/plugin-transform-runtime": "^7.6.2",
-    "@babel/polyfill": "^7.6.0",
-    "@babel/preset-env": "^7.6.3",
-    "babel-loader": "^8.0.6",
+    "@babel/core": "^7.10.3",
+    "@babel/plugin-transform-runtime": "^7.10.3",
+    "@babel/polyfill": "^7.10.1",
+    "@babel/preset-env": "^7.10.3",
+    "babel-loader": "^8.1.0",
     "babel-plugin-prismjs": "^2.0.1",
-    "handlebars": "^4.4.3",
-    "webpack": "^4.41.2",
+    "handlebars": "^4.7.6",
+    "webpack": "^4.43.0",
     "webpack-stream": "^5.2.1"
   }
 }

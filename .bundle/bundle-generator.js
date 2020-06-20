@@ -7,9 +7,9 @@ const {
     spawnSync
 } = require('child_process');
 
-const outDir = '../generator-stylez/lib/'
+const outDir = '../generator-longlast/lib/'
 
-process.chdir('../generator-stylez');
+process.chdir('../generator-longlast');
 const rimraf = require('rimraf');
 rimraf.sync('lib/tasks');
 rimraf.sync('lib/web');

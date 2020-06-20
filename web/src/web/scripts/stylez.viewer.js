@@ -1,15 +1,19 @@
+require("core-js/stable");
+require("regenerator-runtime/runtime");
+require("whatwg-fetch");
+
 const SessionStorage = require('./stylez.storage');
 const Prism = require('prismjs');
 
 const evalHTML = (partialHTML) => {
 
     try {
-        let parser = new DOMParser();
-        let fixedContent = parser.parseFromString(partialHTML, 'text/html');
+        var parser = new DOMParser();
+        var fixedContent = parser.parseFromString(partialHTML, 'text/html');
 
-        let partialDoc = new DocumentFragment();
-        partialDoc.append(fixedContent.body);
-
+        var partialDoc = document.createDocumentFragment();
+        partialDoc.appendChild(fixedContent.body);
+        
         return partialDoc.firstChild.innerHTML;
 
     } catch (error) {
