@@ -20,4 +20,6 @@ const run = (options) => {
 
 }
 
+run();
+
 module.exports = run;
